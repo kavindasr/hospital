@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const nurseRouter = require('./api/nurse');
+const userRouter = require('./api/user');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+const endPointHandler = (app) => {
+  app.use('/user', userRouter);
+  app.use('/api/nurse', nurseRouter);
 
-module.exports = router;
+}
+
+module.exports = endPointHandler;
