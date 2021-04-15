@@ -9,8 +9,8 @@ CREATE TABLE `patient` (
   `title` varchar(4) NOT NULL check(title IN ('Mr','Mrs','Ms','Rev')),
   `name` varchar(100) NOT NULL,
   `adrs` varchar(100) NOT NULL,
-  `guardian_name` varchar(100) NOT NULL,
-  `guardian_adrs` varchar(100) DEFAULT NULL,
+  `gdn_name` varchar(100) NOT NULL,
+  `gdn_adrs` varchar(100) DEFAULT NULL,
   `contact_no` char(10) NOT NULL,
   `age` int NOT NULL,
   `gender` varchar(1) NOT NULL CHECK (gender in ('M','F')),
@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `department`;
 
 CREATE TABLE `department` (
 	`dept_id` int NOT NULL AUTO_INCREMENT,
-    `dept_name` varchar(100),
+    `dept_name` varchar(100) NOT NULL,
     PRIMARY KEY (`dept_id`)
 );
 
