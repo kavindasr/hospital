@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(450),
         allowNull: false,
       },
-      role: {
+      role_id: {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
