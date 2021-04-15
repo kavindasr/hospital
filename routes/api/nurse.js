@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const ApiError = require('../helpers/ApiError');
 const { regSchema } = require('../validation/nurse');
+const { registrationService } = require('../service/nurse');
 
 // registration page
 router.get('/register', (req, res, next) => {
@@ -14,6 +15,8 @@ router.post('/register', async (req, res, next) => {
             next(ApiError.unprocessableEntity(error));
             return;
         }
+        await registrationService(value);
+        res.status(201).send('Patient registered');
     } catch (err) {
         next(err);
     }

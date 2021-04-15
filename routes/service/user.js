@@ -20,10 +20,10 @@ const loginService = async (body) => {
     const user = await database.user.findOne({
         where: { nic: body.nic}
     }); 
-    if (user) throw ApiError.notfound('User not found');
+    if (!user) throw ApiError.notfound({message: 'User not found'});
 
     const isValid = compare(body.pswrd, user.pswrd);
-    if (!isValid) throw ApiError.unauthorized('Password mismatch');
+    if (!isValid) throw ApiError.unauthorized({message: 'Password mismatch'});
 
     const token_data = {
         nic: user.nic,

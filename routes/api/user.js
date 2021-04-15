@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const ApiError = require('../helpers/ApiError');
 const { loginSchema, userRegSchema } = require('../validation/user');
+const timer = require('../config').token_exp;
 const { userRegistrationService,
         loginService,
  } = require('../service/user')
@@ -16,7 +17,9 @@ router.post('/login', async (req, res, next) => {
             return;
         }
         const { token, user, page } = await loginService(value);
-        res.status(200).send()
+        res.cookie('token', token, { maxAge: timer, httpOnly: true });
+        res.status(302);
+        res.render(page, user);
     } catch (err) {
         next(err);
     }
