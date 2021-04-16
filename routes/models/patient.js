@@ -39,10 +39,6 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(1),
         allowNull: false,
       },
-      reg_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
     });
   
     return Patient;

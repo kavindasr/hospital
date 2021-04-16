@@ -34,6 +34,7 @@ router.post('/userRegistration', async (req, res, next) => {
     try{
         const { value, error } = userRegSchema.validate(req.body);
         if (error) {
+            console.log(error);
             next(ApiError.unprocessableEntity(error));
             return;
         }

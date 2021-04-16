@@ -6,10 +6,23 @@ const registrationService = async (body) => {
     const patient = await database.patient.findOne({
         where: { nic: body.nic}
     });
-    if (patient) throw ApiError.unauthorized({message: 'User already exist'});
+    if (patient) throw ApiError.unauthorized({ message: 'User already exist' });
     await database.patient.create(body);
 }
 
+const updateService = async (nic, body) => {
+    const database = await getDatabase();
+    const patient = await database.patient.findOne({
+        where: { nic }
+    });
+    if (!patient) throw ApiError.badRequest({ message: 'Invaild NIC' });
+    Object.keys(body).forEach(element => {
+        patient[element] = body[element];
+    });
+    await patient.save();
+}
+
 module.exports = {
-    registrationService
+    registrationService,
+    updateService,
 }
