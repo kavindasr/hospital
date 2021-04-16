@@ -9,25 +9,25 @@ class ApiError{
         this.message = msg;
     }
     static badRequest(e){
-        return new ApiError(400,e ||'Bad request');
+        return new ApiError(400,e.message ||'Bad request');
     }
     static unauthorized(e){
-        return new ApiError(401,e ||'Unauthorized');
+        return new ApiError(401,e.message ||'Unauthorized');
     }
     static forbidden(e){
-        return new ApiError(403, e || 'Forbidden');
+        return new ApiError(403, e.message || 'Forbidden');
     }
     static notfound(e){
-        return new ApiError(404, e ||'Not found');
+        return new ApiError(404, e.message ||'Not found');
     }
     static unprocessableEntity(e){
-        return new ApiError(422,e);
+        return new ApiError(422,e.message);
     }
     static serverError(e){
-        return new ApiError(500,e ||'Internel server error');
+        return new ApiError(500,e.message ||'Internel server error');
     }
     static conflicted(e){
-        return new ApiError(409 ,e ||'Conflicted');
+        return new ApiError(409 ,e.message ||'Conflicted');
     }
     static redirect(url){
         return new ApiError(301,react_url+url);

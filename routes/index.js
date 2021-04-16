@@ -3,7 +3,7 @@ const userRouter = require('./api/user');
 
 const endPointHandler = (app) => {
   app.use('/user', userRouter);
-  app.use('/api/nurse', nurseRouter);
+  app.use('/nurse', nurseRouter);
 
 }
 
