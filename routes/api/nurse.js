@@ -5,7 +5,7 @@ const { registrationService, updateService } = require('../service/nurse');
 
 // registration page
 router.get('/register', (req, res, next) => {
-    res.status(200).render('index', {});
+    res.status(200).render('patientReg', {});
 });
 
 router.post('/register', async (req, res, next) => {
