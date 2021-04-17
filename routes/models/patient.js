@@ -39,6 +39,12 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(1),
         allowNull: false,
       },
+      createdAt: {
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+      },
     });
   
     return Patient;

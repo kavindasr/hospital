@@ -1,11 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
-    const Department = sequelize.define('department', {
-      dept_id: {
+    const Role = sequelize.define('role', {
+      role_id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      dept_name: {
+      role_name: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
@@ -17,5 +17,5 @@ module.exports = (sequelize, Sequelize) => {
       },
     });
   
-    return Department;
+    return Role;
   };
