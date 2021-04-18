@@ -8,6 +8,11 @@ router.get('/register', (req, res, next) => {
     res.status(200).render('patientReg', {});
 });
 
+// Visit Checkup Page
+router.get('/checkup', (req, res, next) => {
+    res.status(200).render('nurse/checkup', {});
+});
+
 router.post('/register', async (req, res, next) => {
     try {
         const { value, error } = regSchema.validate(req.body);
