@@ -1,3 +1,3 @@
-const ROLES = ['etu', 'nurse', 'blood_bank']
+const ROLES = ['etu', 'etu', 'blood_bank']
 
 module.exports = ROLES
