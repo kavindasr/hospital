@@ -38,8 +38,8 @@ module.exports = (sequelize, Sequelize) => {
       urine: {
         type: Sequelize.STRING(10),
       },
-      nurse_name: {
-        type: Sequelize.STRING(20),
+      nurse_nic: {
+        type: Sequelize.STRING(12),
         allowNull: false,
       },
       createdAt: {

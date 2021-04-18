@@ -1,7 +1,6 @@
 const { verify } = require('../helpers/jwt');
 
 const auth = (req, res, next) => {
-    console.log('hello Im here')
     const token = req.cookies.token;
     if (token) {
         try {
