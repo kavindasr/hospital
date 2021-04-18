@@ -9,7 +9,7 @@ const userRegistrationService = async (body) => {
     const userOld = await database.user.findOne({
         where: { nic: body.nic}
     });
-    if (userOld) throw ApiError.conflicted();
+    if (userOld) throw ApiError.conflicted({ message: 'Can not create the user' });
     body.pswrd = await genHash(body.pswrd);
     
     await database.user.create(body);

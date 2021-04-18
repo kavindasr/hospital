@@ -6,7 +6,7 @@ const accessControl = (accessLvl) => {
             next();
         }
         else {
-            next(ApiError.unauthorized);
+            next(ApiError.unauthorized({ message: 'Can not access the source' }));
         }
 }}
 

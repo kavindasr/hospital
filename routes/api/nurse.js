@@ -15,6 +15,13 @@ router.get('/checkup', (req, res, next) => {
     res.status(200).render('nurse/checkup', {});
 });
 
+// home page
+router.get('/home', accessControl(ROLES['Nurse'].role_id), (req, res, next) => {
+    const user = req.user;
+    res.render('etu', user);
+});
+
+
 router.post('/register', async (req, res, next) => {
     try {
         const { value, error } = regSchema.validate(req.body);
@@ -43,11 +50,6 @@ router.put('/updatePatient/:nic', async (req, res, next) => {
     }
 });
 
-router.get('/home', accessControl(ROLES['Nurse'].role_id), (req, res, next) => {
-    const user = req.user;
-    res.render('etu', user);
-});
-
 router.post('/checkup', accessControl(ROLES['Nurse'].role_id), async (req, res, next) => {
     try {
         const { value, error } = checkupSchema.validate(req.body);
@@ -58,6 +60,7 @@ router.post('/checkup', accessControl(ROLES['Nurse'].role_id), async (req, res, 
         await checkupService(value, req.user.nic);
         res.status(201).send('Checkup completed');
     } catch (err) {
+        console.log(err);
         next(err);
     }
 });
