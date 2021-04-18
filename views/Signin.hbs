@@ -21,19 +21,19 @@
         <div class="image-holder">
             <img src="/design_files/images/login.jpg">
         </div>
-        <form action="">
+        <form method = "POST" action="/user/login">
             <h3>Login</h3>
             <div class="form-wrapper">
-                <input id="email" type="email" placeholder="Email Address" class="form-control">
+                <input id="email" name="nic" type="number" placeholder="NIC" class="form-control">
                 <i class="zmdi zmdi-email"></i>
             </div>
             <div class="form-wrapper">
-                <input id="password" type="password" placeholder="Password" class="form-control">
+                <input id="password" name="pswrd" type="password" placeholder="Password" class="form-control">
                 <i class="zmdi zmdi-lock"></i>
             </div>
             
             <div class="form-group container-login100-form-btn">
-                <button id="btn-login" type="button">
+                <button id="btn-login" type="submit">
                     Login
                     <i class="zimdi zimdi-arrow-right"></i>
                 </button>
