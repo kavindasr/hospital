@@ -35,7 +35,7 @@ const loginService = async (body) => {
     return {
         token,
         user: token_data,
-        page: ROLES[token_data.role_id-1]
+        page: Object.values(ROLES)[token_data.role_id-1].page,
     }
 }
 
