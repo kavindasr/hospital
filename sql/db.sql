@@ -81,7 +81,7 @@ CREATE TABLE `checkup` (
     `height` decimal(6,3) NOT NULL,
     `bmi` decimal(3,1)  NULL,
     `urine` varchar(10) NULL,
-    `nurse_name` varchar(20) NOT NULL,
+    `nurse_nic` varchar(20) NOT NULL,
 	`createdAt` date NULL,
 	`updatedAt` date NULL,
      PRIMARY KEY (`nic`,`visit_date`),
@@ -119,6 +119,8 @@ INSERT INTO `role` VALUES (3,'Blood Bank','2021-04-17',NULL);
 INSERT INTO `role` VALUES (4,'ECG Dept','2021-04-17',NULL);
 INSERT INTO `role` VALUES (5,'Micro Biology Dept','2021-04-17',NULL);
 INSERT INTO `role` VALUES (6,'Radiology Dept','2021-04-17',NULL);
+
+INSERT INTO `user` VALUES ('199912341234', 'Bob', '$2b$10$lxqLtnKGRLAKxeIk3P0fs.oKj6TDCVKlCkIUN0Kqb19Uv5tMJDjKy', '2', '2021-04-18', '2021-04-18');
 
 INSERT INTO `history` VALUES ('199712309876','1','2021-01-02','http/nbnbnbcbcncn/nbnbn','199376509876 , 198765401287','aaaa aaaa aaa aaaa aaa aaa aa a a aaaaa','2021-04-17',NULL);
 INSERT INTO `history` VALUES ('198723709876','2','2021-02-02','http/nbnbnbtrtrrcbcncn/nbnbn','199376509876 , 198765401287','aaaa gggg aaaa aaa aaaa aaa aaa aa a a aaaaa','2021-04-17',NULL);
