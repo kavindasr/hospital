@@ -51,7 +51,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <form method="POST" class="row g-3" action="">   
+                        <form method="POST" class="row g-3" action="/nurse/checkup">   
                             <div class="col-md-6">
                                 <label for="validationDefault01" class="form-label">Patient NIC Number</label>
                                 <input name="nic" type="text" class="form-control" id="validationDefault01" required>
@@ -113,10 +113,10 @@
                                 <input name="urine" type="text" class="form-control" id="inputAddress">
                             </div>
 
-                            <div class="col-12">
+                            {{!-- <div class="col-12">
                                 <label for="inputAddress" class="form-label">NIC of the Examined Nursing Officer</label>
                                 <input name="nurse_nic" type="text" class="form-control" id="inputAddress" required>
-                            </div>
+                            </div> --}}
 
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">SUBMIT</button>
