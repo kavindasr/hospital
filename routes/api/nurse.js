@@ -58,7 +58,6 @@ router.post('/checkup', accessControl(ROLES['Nurse'].role_id), async (req, res, 
         await checkupService(value, req.user.nic);
         res.status(201).send('Checkup completed');
     } catch (err) {
-        console.log(err);
         next(err);
     }
 });
