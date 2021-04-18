@@ -24,4 +24,18 @@ const updateSchema = Joi.object().keys({
     gender: Joi.string().allow('M', 'F'),
     marital_status: Joi.string().allow('M', 'S'),
 });
-module.exports = { regSchema, updateSchema }
+
+const checkupSchema = Joi.object().keys({
+    nic: Joi.string().regex(/^[0-9]+$/).length(12).required(),
+    visit_date: Joi.date().required(),
+    temp: Joi.number().required(),
+    pulse_rate: Joi.number().required(),
+    resp_rate: Joi.number(),
+    bp: Joi.string().max(10).required(),
+    weight: Joi.number().required(),
+    height: Joi.number().required(),
+    bmi: Joi.number(),
+    urine: Joi.string().max(10),
+});
+
+module.exports = { regSchema, updateSchema, checkupSchema }

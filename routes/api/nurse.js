@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const ApiError = require('../helpers/ApiError');
-const { regSchema, updateSchema } = require('../validation/nurse');
-const { registrationService, updateService } = require('../service/nurse');
+const { regSchema, updateSchema, checkupSchema } = require('../validation/nurse');
+const { registrationService, updateService, checkupService } = require('../service/nurse');
 const accessControl = require('../middleware/access');
 const ROLES = require('../enums/role');
 
@@ -46,6 +46,22 @@ router.put('/updatePatient/:nic', async (req, res, next) => {
 router.get('/home', accessControl(ROLES['Nurse'].role_id), (req, res, next) => {
     const user = req.user;
     res.render('etu', user);
+});
+
+router.post('/checkup', accessControl(ROLES['Nurse'].role_id), async (req, res, next) => {
+    try {
+        const { value, error } = checkupSchema.validate(req.body);
+        console.log(error);
+        if (error) {
+            next(ApiError.unprocessableEntity(error));
+            return;
+        }
+        await checkupService(value);
+        res.status(201).send('Checkup completed');
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
 });
 
 module.exports = router;
