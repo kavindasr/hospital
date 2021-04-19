@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const History = sequelize.define('history', {
+    const Request = sequelize.define('request', {
       nic: {
         type: Sequelize.STRING(12),
         primaryKey: true,
@@ -9,22 +9,31 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      visit_date: {
+      req_date: {
         type: Sequelize.DATE,
         allowNull: false,
         primaryKey: true,
       },
-      report: {
+      req_by: {
+        type: Sequelize.STRING(12),
+        allowNull: false,
+      },
+      test_type: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
-      examined_by: {
-        type: Sequelize.STRING(200),
+      test_status: {
+        type: Sequelize.STRING(10),
         allowNull: false,
       },
-      smry: {
-        type: Sequelize.TEXT,
-        allowNull: false,
+      exam_by: {
+        type: Sequelize.STRING(12),
+      },
+      formdata: {
+        type: Sequelize.JSON,
+      },
+      attach: {
+        type: Sequelize.STRING(200),
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -34,5 +43,5 @@ module.exports = (sequelize, Sequelize) => {
       },
     });
   
-    return History;
+    return Request;
   };
