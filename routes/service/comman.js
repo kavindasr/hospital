@@ -11,8 +11,7 @@ const getPatient = async (nic) => {
 
 const getCheckup = async (nic, visitDate) => {
     const database = await getDatabase();
-    console.log(visitDate);
-    const checkup = await database.checkup.findAll({
+    const checkup = await database.checkup.findOne({
         where: {
             [Op.and]: [
                 { nic },
@@ -23,7 +22,21 @@ const getCheckup = async (nic, visitDate) => {
     return checkup;
 }
 
+const getEtuform = async (nic, visitDate) => {
+    const database = await getDatabase();
+    const form = await database.etuform.findOne({
+        where: {
+            [Op.and]: [
+                { nic },
+                { visit_date: visitDate }
+            ]
+        }
+    });
+    return form;
+}
+
 module.exports = {
     getPatient,
-    getCheckup
+    getCheckup,
+    getEtuform,
 }
