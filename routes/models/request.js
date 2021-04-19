@@ -24,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       test_status: {
         type: Sequelize.STRING(10),
-        allowNull: false,
+        defaultValue: "Pending"
       },
       exam_by: {
         type: Sequelize.STRING(12),

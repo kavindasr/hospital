@@ -53,26 +53,6 @@ CREATE TABLE `user` (
     FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
 );
 
-DROP TABLE IF EXISTS `request`;
-
-CREATE TABLE `request` (
-	`nic` varchar(12) NOT NULL,
-    `dept_id` int NOT NULL,
-    `req_date` date NOT NULL,
-    `req_by` varchar(12) NOT NULL,
-    `test_type` varchar(100) NOT NULL,
-    `test_status` varchar(10) NOT NULL CHECK (test_status in ('Pending','Completed','Rejected')),
-	`exam_by` varchar(12) NULL,
-    `formdata` json NULL,
-    `attach` varchar(200) NULL,
-	`createdAt` date NULL,
-	`updatedAt` date NULL,
-     PRIMARY KEY (`nic`,`dept_id`,`req_date`),
-     FOREIGN KEY (`nic`) REFERENCES `patient` (`nic`),
-	 FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`),
-     FOREIGN KEY (`req_by`) REFERENCES `user` (`nic`),
-     FOREIGN KEY (`exam_by`) REFERENCES `user` (`nic`)
-);
 
 DROP TABLE IF EXISTS `checkup`;
 
@@ -87,12 +67,55 @@ CREATE TABLE `checkup` (
     `height` decimal(6,3) NOT NULL,
     `bmi` decimal(3,1)  NULL,
     `urine` varchar(10) NULL,
-    `nurse_nic` varchar(20) NOT NULL,
+    `nurse_nic` varchar(12) NOT NULL,
 	`createdAt` date NULL,
 	`updatedAt` date NULL,
      PRIMARY KEY (`nic`,`visit_date`),
      FOREIGN KEY (`nic`) REFERENCES `patient` (`nic`),
      FOREIGN KEY (`nurse_nic`) REFERENCES `user` (`nic`)
+);
+
+DROP TABLE IF EXISTS `etuform`;
+
+CREATE TABLE `etuform` (
+	`nic` varchar(12) NOT NULL,
+    `visit_date` date NOT NULL,
+    `allergies` varchar(100) NULL,
+    `observation` JSON NOT NULL,
+    `pupils` varchar(20) NULL,
+	`so2` decimal(6,3) NULL,
+    `gcs` varchar(1) NOT NULL CHECK (gcs in ('E','V','M')),
+    `etu_doc` varchar(12) NOT NULL,
+	`test_depts` json NULL,
+    `severity` varchar(50) NULL,
+    `asgn_ward` varchar(50) NULL,
+	`createdAt` date NULL,
+	`updatedAt` date NULL,
+     PRIMARY KEY (`nic`,`visit_date`),
+     FOREIGN KEY (`nic`) REFERENCES `patient` (`nic`),
+     FOREIGN KEY (`etu_doc`) REFERENCES `user` (`nic`)
+);
+
+
+DROP TABLE IF EXISTS `request`;
+
+CREATE TABLE `request` (
+	`nic` varchar(12) NOT NULL,
+    `dept_id` int NOT NULL,
+    `req_date` date NOT NULL,
+    `req_by` varchar(12) NOT NULL,
+    `test_type` varchar(100) NOT NULL,
+    `test_status` varchar(10) default 'Pending' CHECK (test_status in ('Pending','Completed','Rejected')),
+	`exam_by` varchar(12) NULL,
+    `formdata` json NULL,
+    `attach` varchar(200) NULL,
+	`createdAt` date NULL,
+	`updatedAt` date NULL,
+     PRIMARY KEY (`nic`,`dept_id`,`req_date`),
+     FOREIGN KEY (`nic`) REFERENCES `patient` (`nic`),
+	 FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`),
+     FOREIGN KEY (`req_by`) REFERENCES `user` (`nic`),
+     FOREIGN KEY (`exam_by`) REFERENCES `user` (`nic`)
 );
 
 
