@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const multer = require('multer');
 const { uploadSchema } = require('../validation/upload');
+const ApiError = require('../helpers/ApiError');
+const { requestService } = require('../service/upload');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -27,11 +29,15 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-router.put('/formData', upload.single('attach'), async (req, res, next) => {
+router.put('/formData/:nic/:reqDate', upload.single('attach'), async (req, res, next) => {
     try{
         const { value, error } = uploadSchema.validate(req.body);
-        console.log(JSON.parse(value.formdata));
-        res.send('ok');
+        if (error) {
+            next(ApiError.unprocessableEntity(error));
+            return;
+        }
+        await requestService(value, req.file, req.params.nic, req.params.reqDate, req.user.nic, req.user.role_id);
+        res.status(201).send('Complete the request');
     } catch (err) {
         next(err);
     }
