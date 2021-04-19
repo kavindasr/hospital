@@ -16,7 +16,7 @@ router.get('/checkup', (req, res, next) => {
 });
 
 // home page
-router.get('/home', accessControl(ROLES['Nurse'].role_id), (req, res, next) => {
+router.get('/home', accessControl([ ROLES['Nurse'].role_id ]), (req, res, next) => {
     const user = req.user;
     res.render('etu', user);
 });
@@ -50,7 +50,7 @@ router.put('/updatePatient/:nic', async (req, res, next) => {
     }
 });
 
-router.post('/checkup', accessControl(ROLES['Nurse'].role_id), async (req, res, next) => {
+router.post('/checkup', accessControl([ ROLES['Nurse'].role_id ]), async (req, res, next) => {
     try {
         const { value, error } = checkupSchema.validate(req.body);
         if (error) {
