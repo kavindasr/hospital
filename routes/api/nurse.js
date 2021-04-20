@@ -7,7 +7,7 @@ const ROLES = require('../enums/role');
 
 // registration page
 router.get('/register', (req, res, next) => {
-    res.status(200).render('patientReg', {});
+    res.status(200).render('nurse/patientReg', {});
 });
 
 // Visit Checkup Page
@@ -18,7 +18,7 @@ router.get('/checkup', (req, res, next) => {
 // home page
 router.get('/home', accessControl([ ROLES['Nurse'].role_id ]), (req, res, next) => {
     const user = req.user;
-    res.render('etu', user);
+    res.render('nurse/home', user);
 });
 
 
