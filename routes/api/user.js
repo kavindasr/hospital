@@ -19,7 +19,7 @@ router.post('/login', async (req, res, next) => {
         const { token, user, page } = await loginService(value);
         res.cookie('token', token, { maxAge: timer, httpOnly: true });
         res.status(302);
-        res.redirect('/nurse/home');
+        res.redirect(page);
     } catch (err) {
         next(err);
     }

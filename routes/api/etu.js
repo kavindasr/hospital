@@ -2,6 +2,14 @@ const router = require('express').Router();
 const ApiError = require('../helpers/ApiError');
 const { etuformSchema } = require('../validation/etu');
 const { etuformService } = require('../service/etu');
+const accessControl = require('../middleware/access');
+const ROLES = require('../enums/role');
+
+// home page
+router.get('/home', accessControl([ ROLES['ETU User'].role_id ]), (req, res, next) => {
+    const user = req.user;
+    res.render('etu/home', user);
+});
 
 router.post('/etuform', async (req, res, next) => {
     try {

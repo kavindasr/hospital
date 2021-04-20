@@ -1,11 +1,11 @@
 const ROLES = {
     'ETU User': {
         role_id: 1,
-        page: 'etu',
+        page: '/etu/home',
     },
     'Nurse': {
         role_id: 2,
-        page: 'etu',
+        page: '/nurse/home',
     },
     'Blood Bank': {
         role_id: 3,
