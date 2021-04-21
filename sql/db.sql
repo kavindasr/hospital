@@ -135,6 +135,7 @@ INSERT INTO `role` VALUES (3,'Blood Bank','2021-04-17',NULL);
 INSERT INTO `role` VALUES (4,'ECG Dept','2021-04-17',NULL);
 INSERT INTO `role` VALUES (5,'Micro Biology Dept','2021-04-17',NULL);
 INSERT INTO `role` VALUES (6,'Radiology Dept','2021-04-17',NULL);
+INSERT INTO `role` VALUES (7,'Chemical_Pathology Dept','2021-04-17',NULL);
 
 INSERT INTO `user` VALUES ('199912341234', 'Bob', '$2b$10$lxqLtnKGRLAKxeIk3P0fs.oKj6TDCVKlCkIUN0Kqb19Uv5tMJDjKy', '2', '2021-04-18', '2021-04-18');
 INSERT INTO `user` VALUES ('198088888888', 'Gayan', '$2b$10$lxqLtnKGRLAKxeIk3P0fs.oKj6TDCVKlCkIUN0Kqb19Uv5tMJDjKy', '1', '2021-04-18', '2021-04-18');

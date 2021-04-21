@@ -23,6 +23,10 @@ const ROLES = {
         role_id: 6,
         page: 'etu',
     },
+    'Chemical_Pathology Dept': {
+        role_id: 7,
+        page: 'etu',
+    },
 }
 
 module.exports = ROLES

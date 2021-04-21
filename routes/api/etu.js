@@ -17,7 +17,6 @@ router.get('/etuform', (req, res, next) => {
 });
 
 router.post('/etuform', async (req, res, next) => {
-    console.log(req.body);
     try {
         const { value, error } = etuformSchema.validate(req.body);
         if (error) {
