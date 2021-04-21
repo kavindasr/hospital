@@ -7,7 +7,7 @@ const etuformSchema = Joi.object().keys({
     pupils: Joi.string().max(20),
     so2: Joi.number(),
     gcs: Joi.string().length(1).allow('E','V','M').required(),
-    test_depts: Joi.object(),
+    test_depts: Joi.array(),
     severity: Joi.string().max(50),
     asgn_ward: Joi.string().max(50),
 });
