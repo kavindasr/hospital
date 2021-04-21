@@ -11,7 +11,13 @@ router.get('/home', accessControl([ ROLES['ETU User'].role_id ]), (req, res, nex
     res.render('etu/home', user);
 });
 
+// etu form
+router.get('/etuform', (req, res, next) => {
+    res.status(200).render('etu/etuform', {});
+});
+
 router.post('/etuform', async (req, res, next) => {
+    console.log(req.body);
     try {
         const { value, error } = etuformSchema.validate(req.body);
         if (error) {

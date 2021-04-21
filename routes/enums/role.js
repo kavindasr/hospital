@@ -9,7 +9,7 @@ const ROLES = {
     },
     'Blood Bank': {
         role_id: 3,
-        page: 'etu',
+        page: '/department/bldbank_home',
     },
     'ECG Dept': {
         role_id: 4,
