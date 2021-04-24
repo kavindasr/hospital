@@ -9,7 +9,7 @@ const userRegistrationService = async (body) => {
     const userOld = await database.user.findOne({
         where: { nic: body.nic}
     });
-    if (userOld) throw ApiError.conflicted();
+    if (userOld) throw ApiError.conflicted({ message: 'Can not create the user' });
     body.pswrd = await genHash(body.pswrd);
     
     await database.user.create(body);
@@ -19,23 +19,23 @@ const loginService = async (body) => {
     const database = await getDatabase();
     const user = await database.user.findOne({
         where: { nic: body.nic}
-    }); 
+    });   
     if (!user) throw ApiError.notfound({message: 'User not found'});
-
+    
     const isValid = compare(body.pswrd, user.pswrd);
     if (!isValid) throw ApiError.unauthorized({message: 'Password mismatch'});
-
+    
     const token_data = {
         nic: user.nic,
         user_name: user.user_name,
-        role: user.role,
+        role_id: user.role_id,
     }
     const token = sign(token_data);
-
+    
     return {
         token,
         user: token_data,
-        page: ROLES[token_data.role-1]
+        page: Object.values(ROLES)[token_data.role_id-1].page,
     }
 }
 

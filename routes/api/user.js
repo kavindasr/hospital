@@ -7,7 +7,7 @@ const { userRegistrationService,
  } = require('../service/user')
 
 router.get('/login', (req, res, next) => {
-    res.render('index', {title: 'Hospital'});
+    res.render('Signin', {title: 'Hospital'});
 });
 router.post('/login', async (req, res, next) => {
     try {
@@ -19,7 +19,7 @@ router.post('/login', async (req, res, next) => {
         const { token, user, page } = await loginService(value);
         res.cookie('token', token, { maxAge: timer, httpOnly: true });
         res.status(302);
-        res.render(page, user);
+        res.redirect(page);
     } catch (err) {
         next(err);
     }
@@ -27,7 +27,7 @@ router.post('/login', async (req, res, next) => {
  
 // User Registration page
 router.get('/userRegistration', (req, res, next) => {
-    res.render('index', {});
+    res.render('Signup', {});
 });
 
 router.post('/userRegistration', async (req, res, next) => {

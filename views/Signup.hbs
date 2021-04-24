@@ -8,43 +8,47 @@
             
             
             <!-- MATERIAL DESIGN ICONIC FONT -->
-        <link rel="stylesheet" href="design_files/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="/design_files/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
                 
                 <!-- STYLE CSS -->
-        <link rel="stylesheet" href="design_files/css/style.css">
+        <link rel="stylesheet" href="/design_files/css/style.css">
     </head>
     <body>
-        <div class="wrapper" style="background-image: url('design_files/images/background.jpg')">
+        <div class="wrapper" style="background-image: url('/design_files/images/background.jpg')">
         <div class="inner">
         <div class="image-holder">
-            <img src="design_files/images/edited1.jpg">
+            <img src="/design_files/images/edited1.jpg">
         </div>
-        <form action="">
+        <form method = "POST" action="/user/userRegistration">
             <h3>Register</h3>
             <div class="form-wrapper">
-                <input id="email" type="email" placeholder="Email Address" class="form-control">
+                <input id="email" name='nic' type="number" placeholder="NIC" class="form-control">
                 <i class="zmdi zmdi-email"></i>
             </div>
             <div class="form-wrapper">
-                <input id="department" type="string" placeholder="Department" class="form-control">
+                <input id="department" name = "user_name" type="string" placeholder="User Name" class="form-control">
                 <i class="zmdi zmdi-email"></i>
             </div>
             <div class="form-wrapper">
-                <input id="password" type="password" placeholder="Password" class="form-control">
+                <input id="password"  type="password" placeholder="Password" class="form-control">
                 <i class="zmdi zmdi-lock"></i>
             </div>
             <div class="form-wrapper">
-                <input id="confirm password" type="password" placeholder="Confirm Password" class="form-control">
+                <input id="confirm password" name ="pswrd" type="password" placeholder="Confirm Password" class="form-control">
                 <i class="zmdi zmdi-lock"></i>
+            </div>
+            <div class="form-wrapper">
+                <input id="email" name='role_id' type="number" placeholder="Role ID" class="form-control">
+                <i class="zmdi zmdi-email"></i>
             </div>
             <div class="form-group container-login100-form-btn">
-                <button id="btn-signup" type="button">
+                <button id="btn-signup" type="submit">
                     Register
                     <i class="zimdi zimdi-arrow-right"></i>
                 </button>
             </div>
             <div class="w-full text-center" style="margin-top: 49%; font-size: 15px;">
-                <a href="Signin.html" class="text-dark">
+                <a href="login" class="text-dark">
                     Already have an account?
                 </a>
             </div>

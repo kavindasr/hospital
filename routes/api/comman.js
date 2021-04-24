@@ -6,6 +6,10 @@ router.get('/patient', async (req, res, next) => {
         const patient = await getPatient(req.query.nic);
         // // res.status(200).json(patient);
         res.status(200).render('nurse/viewPatient', {patient});
+router.get('/patient/:nic', async (req, res, next) => {
+    try {
+        const patient = await getPatient(req.params.nic);
+        res.status(200).json(patient);
     } catch (err) {
         next(err);
     }
