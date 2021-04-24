@@ -8,6 +8,24 @@ router.get('/register', (req, res, next) => {
     res.status(200).render('patientReg', {});
 });
 
+// visit patient details page
+router.get('/viewPatient', (req, res, next) => {
+    res.status(200).render('nurse/viewPatient', {});
+});
+
+
+// Visit Checkup Page
+router.get('/checkup', (req, res, next) => {
+    res.status(200).render('nurse/checkup', {});
+});
+
+// home page
+router.get('/home', accessControl([ ROLES['Nurse'].role_id ]), (req, res, next) => {
+    const user = req.user;
+    res.render('nurse/home', user);
+});
+
+
 router.post('/register', async (req, res, next) => {
     try {
         const { value, error } = regSchema.validate(req.body);
