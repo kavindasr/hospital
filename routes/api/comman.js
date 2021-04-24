@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { getPatient, getCheckup, getEtuform } = require('../service/comman');
 
-router.get('/patient/:nic', async (req, res, next) => {
+router.get('/patient', async (req, res, next) => {
     try {
-        const patient = await getPatient(req.params.nic);
-        res.status(200).json(patient);
+        const patient = await getPatient(req.query.nic);
+        res.status(200).render('nurse/viewPatient', {patient});
     } catch (err) {
         next(err);
     }

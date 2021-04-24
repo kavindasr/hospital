@@ -10,6 +10,12 @@ router.get('/register', (req, res, next) => {
     res.status(200).render('nurse/patientReg', {});
 });
 
+// visit patient details page
+router.get('/viewPatient', (req, res, next) => {
+    res.status(200).render('nurse/viewPatient', {});
+});
+
+
 // Visit Checkup Page
 router.get('/checkup', (req, res, next) => {
     res.status(200).render('nurse/checkup', {});

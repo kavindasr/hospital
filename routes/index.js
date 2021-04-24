@@ -7,7 +7,7 @@ const etuRouter = require('./api/etu');
 const endPointHandler = (app) => {
   app.use('/user', userRouter);
   app.use('/nurse', nurseRouter);
-  app.use('/comman', commanRouter);
+  app.use('/common', commanRouter);
   app.use('/upload', uploadRouter);
   app.use('/etu', etuRouter);
 }
