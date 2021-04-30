@@ -22,6 +22,9 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
+      special_note: {
+        type: Sequelize.STRING(250),
+      },
       test_status: {
         type: Sequelize.STRING(10),
         defaultValue: "Pending"

@@ -105,6 +105,7 @@ CREATE TABLE `request` (
     `req_date` date NOT NULL,
     `req_by` varchar(12) NOT NULL,
     `test_type` varchar(100) NOT NULL,
+    `special_note` varchar(250) NULL,
     `test_status` varchar(10) default 'Pending' CHECK (test_status in ('Pending','Completed','Rejected')),
 	`exam_by` varchar(12) NULL,
     `formdata` json NULL,
@@ -142,7 +143,7 @@ INSERT INTO `user` VALUES ('198088888888', 'Gayan', '$2b$10$lxqLtnKGRLAKxeIk3P0f
 INSERT INTO `user` VALUES ('198012345678', 'Jayan', '$2b$10$lxqLtnKGRLAKxeIk3P0fs.oKj6TDCVKlCkIUN0Kqb19Uv5tMJDjKy', '3', '2021-04-18', '2021-04-18');
 INSERT INTO `user` VALUES ('198812345678', 'Nimal', '$2b$10$lxqLtnKGRLAKxeIk3P0fs.oKj6TDCVKlCkIUN0Kqb19Uv5tMJDjKy', '4', '2021-04-18', '2021-04-18');
 
-INSERT INTO `request` VALUES ('199712309876','1','2021-01-02','198088888888','Red Blood Cell Cnt','Pending',NULL,NULL,NULL,'2021-04-19',NULL);
-INSERT INTO `request` VALUES ('198723709876','2','2021-02-02','198088888888','ECG','Completed','198812345678','{"key1": "value1", "key2": "value2"}','https://ghsghdsghdg','2021-04-19',NULL);
+INSERT INTO `request` VALUES ('199712309876','1','2021-01-02','198088888888','Red Blood Cell Cnt','Spec Not for blood Bank','Pending',NULL,NULL,NULL,'2021-04-19',NULL);
+INSERT INTO `request` VALUES ('198723709876','2','2021-02-02','198088888888','ECG',Null,'Completed','198812345678','{"key1": "value1", "key2": "value2"}','https://ghsghdsghdg','2021-04-19',NULL);
 
 INSERT INTO `checkup` VALUES ('199712309876','2021-01-02','36.7','70.12344',null,'120/80','54.54','180.89',null,null,'199912341234','2021-03-21',null);
