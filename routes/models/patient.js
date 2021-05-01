@@ -46,6 +46,9 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATE,
       },
     });
-  
+    
+    Patient.associate = (models) => {
+      models.patient.hasMany(models.request, {onDelete: 'cascade', foriegnKey: 'nic'});
+    }
     return Patient;
   };

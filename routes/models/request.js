@@ -46,5 +46,8 @@ module.exports = (sequelize, Sequelize) => {
       },
     });
   
+    Request.associate = (models) => {
+      models.request.belongsTo(models.patient, {foreginKey: 'nic'});
+    }
     return Request;
   };
