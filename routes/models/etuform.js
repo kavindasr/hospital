@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const Etuform = sequelize.define('etuform', {
-      nic: {
+      patientNic: {
         type: Sequelize.STRING(12),
         primaryKey: true,
       },
@@ -26,7 +26,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(1),
         allowNull: false,
       },
-      etu_doc: {
+      userNic: {
         type: Sequelize.STRING(12),
         allowNull: false,
       },
@@ -47,5 +47,9 @@ module.exports = (sequelize, Sequelize) => {
       },
     });
   
+    Etuform.associate = (models) => {
+      models.etuform.belongsTo(models.patient, {foriegnKey: 'patientNic'});
+      models.etuform.belongsTo(models.user, {foriegnKey: 'userNic'})
+    }
     return Etuform;
   };
