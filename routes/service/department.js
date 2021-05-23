@@ -8,7 +8,7 @@ const viewReqsService = async (userRole, nic) => {
         include: [{model: database.patient}],
     });
     console.log(requests);
-    return 'requests';
+    return requests;
 }
 
 module.exports = {

@@ -47,8 +47,9 @@ module.exports = (sequelize, Sequelize) => {
     });
   
     Request.associate = (models) => {
-      models.request.belongsTo(models.patient, {foreginKey: 'patientNic'});
-      models.request.belongsTo(models.user, {foreginKey: 'userNic'})
+      models.request.belongsTo(models.patient, {foreignKey: 'patientNic'});
+      models.request.belongsTo(models.user, {foreignKey: 'userNic'});
+      models.request.belongsTo(models.department, {foreignKey: 'dept_id'});
     }
     return Request;
   };

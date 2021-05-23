@@ -16,6 +16,11 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATE,
       },
     });
+
+    Department.associate = (models) => {
+      models.department.hasMany(models.request, {onDelete: 'cascade', foreignKey: 'dept_id'});
+      
+    }
   
     return Department;
   };
