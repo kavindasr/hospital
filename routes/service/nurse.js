@@ -25,7 +25,7 @@ const updateService = async (nic, body) => {
 const checkupService = async (body, nurse_nic) => {
     const database = await getDatabase();
     const patient = await database.patient.findOne({
-        where: { nic: body.nic}
+        where: { nic: body.patientNic}
     });
     if (!patient) throw ApiError.badRequest({message: 'Register user first'});
 

@@ -23,6 +23,11 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATE,
       },
     });
-  
+    
+    User.associate = (models) => {
+      models.user.hasMany(models.request, {onDelete: 'cascade', foreignKey: 'userNic'});
+      models.user.hasMany(models.etuform, {onDelete: 'cascade', foreignKey: 'userNic'});
+      models.user.hasMany(models.checkup, {onDelete: 'cascade', foreignKey: 'userNic'});
+    }
     return User;
   };

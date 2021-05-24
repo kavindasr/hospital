@@ -26,7 +26,7 @@ const updateSchema = Joi.object().keys({
 });
 
 const checkupSchema = Joi.object().keys({
-    nic: Joi.string().regex(/^[0-9]+$/).length(12).required(),
+    patientNic: Joi.string().regex(/^[0-9]+$/).length(12).required(),
     visit_date: Joi.date().required(),
     temp: Joi.number().required(),
     pulse_rate: Joi.number().required(),

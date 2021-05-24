@@ -48,7 +48,10 @@ module.exports = (sequelize, Sequelize) => {
     });
     
     Patient.associate = (models) => {
-      models.patient.hasMany(models.request, {onDelete: 'cascade', foriegnKey: 'nic'});
+      models.patient.hasMany(models.request, {onDelete: 'cascade', foreignKey: 'patientNic'});
+      models.patient.hasMany(models.etuform, {onDelete: 'cascade', foreignKey: 'patientNic'});
+      models.patient.hasMany(models.checkup, {onDelete: 'cascade', foreignKey: 'patientNic'});
+      
     }
     return Patient;
   };

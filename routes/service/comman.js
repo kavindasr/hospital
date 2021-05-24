@@ -9,28 +9,30 @@ const getPatient = async (nic) => {
     return patient;
 }
 
-const getCheckup = async (nic, visitDate) => {
+const getCheckup = async (patientNic, visitDate) => {
     const database = await getDatabase();
     const checkup = await database.checkup.findOne({
         where: {
             [Op.and]: [
-                { nic },
+                { patientNic },
                 { visit_date: visitDate }
             ]
-        }
+        },
+        include: [{model: database.user, attributes: ['nic', 'user_name', 'role_id']}],
     });
     return checkup;
 }
 
-const getEtuform = async (nic, visitDate) => {
+const getEtuform = async (patientNic, visitDate) => {
     const database = await getDatabase();
     const form = await database.etuform.findOne({
         where: {
             [Op.and]: [
-                { nic },
+                { patientNic },
                 { visit_date: visitDate }
             ]
-        }
+        },
+        include: [{model: database.user, attributes: ['nic', 'user_name', 'role_id']}],
     });
     return form;
 }

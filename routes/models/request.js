@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const Request = sequelize.define('request', {
-      nic: {
+      patientNic: {
         type: Sequelize.STRING(12),
         primaryKey: true,
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(10),
         defaultValue: "Pending"
       },
-      exam_by: {
+      userNic: {
         type: Sequelize.STRING(12),
       },
       formdata: {
@@ -47,7 +47,9 @@ module.exports = (sequelize, Sequelize) => {
     });
   
     Request.associate = (models) => {
-      models.request.belongsTo(models.patient, {foreginKey: 'nic'});
+      models.request.belongsTo(models.patient, {foreignKey: 'patientNic'});
+      models.request.belongsTo(models.user, {foreignKey: 'userNic'});
+      models.request.belongsTo(models.department, {foreignKey: 'dept_id'});
     }
     return Request;
   };

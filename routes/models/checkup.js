@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const Checkup = sequelize.define('checkup', {
-      nic: {
+      patientNic: {
         type: Sequelize.STRING(12),
         primaryKey: true,
       },
@@ -38,7 +38,7 @@ module.exports = (sequelize, Sequelize) => {
       urine: {
         type: Sequelize.STRING(10),
       },
-      nurse_nic: {
+      userNic: {
         type: Sequelize.STRING(12),
         allowNull: false,
       },
@@ -50,5 +50,9 @@ module.exports = (sequelize, Sequelize) => {
       },
     });
   
+    Checkup.associate = (models) => {
+      models.checkup.belongsTo(models.patient, {foreginKey: 'patientNic'});
+      models.checkup.belongsTo(models.user, {foreginKey: 'userNic'});
+    }
     return Checkup;
   };
