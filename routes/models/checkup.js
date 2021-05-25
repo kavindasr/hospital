@@ -1,13 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
     const Checkup = sequelize.define('checkup', {
-      patientNic: {
-        type: Sequelize.STRING(12),
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
       },
       visit_date: {
         type: Sequelize.DATE,
         allowNull: false,
-        primaryKey: true,
       },
       temp: {
         type: Sequelize.DECIMAL(6,3),
@@ -38,21 +38,19 @@ module.exports = (sequelize, Sequelize) => {
       urine: {
         type: Sequelize.STRING(10),
       },
-      userNic: {
-        type: Sequelize.STRING(12),
-        allowNull: false,
-      },
       createdAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
       updatedAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
     });
   
     Checkup.associate = (models) => {
-      models.checkup.belongsTo(models.patient, {foreginKey: 'patientNic'});
-      models.checkup.belongsTo(models.user, {foreginKey: 'userNic'});
+      Checkup.belongsTo(models.patient);
+      Checkup.belongsTo(models.nurse);
     }
     return Checkup;
   };

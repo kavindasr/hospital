@@ -10,9 +10,17 @@ const userRegistrationService = async (body) => {
         where: { nic: body.nic}
     });
     if (userOld) throw ApiError.conflicted({ message: 'Can not create the user' });
-    body.pswrd = await genHash(body.pswrd);
+    body.password = await genHash(body.password);
+    const role = body.role;
     
+    delete body.role;
     await database.user.create(body);
+
+    const sepecificUser = (body.departmentId)? 
+                        {userNic: body.nic, departmentId: body.departmentId}
+                        :{userNic: body.nic}
+    await database[role].create(sepecificUser);
+    
 }
 
 const loginService = async (body) => {

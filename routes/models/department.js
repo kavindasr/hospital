@@ -1,25 +1,31 @@
 module.exports = (sequelize, Sequelize) => {
     const Department = sequelize.define('department', {
-      dept_id: {
+      id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      dept_name: {
+      name: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
       updatedAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
     });
 
     Department.associate = (models) => {
-      models.department.hasMany(models.request, {onDelete: 'cascade', foreignKey: 'dept_id'});
-      
+      Department.hasOne(models.dWoker, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
+      Department.hasMany(models.request);
     }
   
     return Department;
