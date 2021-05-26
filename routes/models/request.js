@@ -1,21 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
+
     const Request = sequelize.define('request', {
-      patientNic: {
-        type: Sequelize.STRING(12),
-        primaryKey: true,
-      },
-      dept_id: {
+      id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
       },
       req_date: {
         type: Sequelize.DATE,
-        allowNull: false,
-        primaryKey: true,
-      },
-      req_by: {
-        type: Sequelize.STRING(12),
         allowNull: false,
       },
       test_type: {
@@ -27,10 +19,8 @@ module.exports = (sequelize, Sequelize) => {
       },
       test_status: {
         type: Sequelize.STRING(10),
-        defaultValue: "Pending"
-      },
-      userNic: {
-        type: Sequelize.STRING(12),
+        defaultValue: "Pending",
+        values: ['Pending', 'Completed','Rejected'],
       },
       formdata: {
         type: Sequelize.JSON,
@@ -40,16 +30,18 @@ module.exports = (sequelize, Sequelize) => {
       },
       createdAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
       updatedAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
     });
   
     Request.associate = (models) => {
-      models.request.belongsTo(models.patient, {foreignKey: 'patientNic'});
-      models.request.belongsTo(models.user, {foreignKey: 'userNic'});
-      models.request.belongsTo(models.department, {foreignKey: 'dept_id'});
+      Request.belongsTo(models.patient);
+      Request.belongsTo(models.department);
+      Request.belongsTo(models.etuform);
     }
     return Request;
   };

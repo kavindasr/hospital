@@ -1,13 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
     const Etuform = sequelize.define('etuform', {
-      patientNic: {
-        type: Sequelize.STRING(12),
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
       },
       visit_date: {
         type: Sequelize.DATE,
         allowNull: false,
-        primaryKey: true,
       },
       allergies: {
         type: Sequelize.STRING(100),
@@ -22,13 +22,14 @@ module.exports = (sequelize, Sequelize) => {
       so2: {
         type: Sequelize.DECIMAL(6,3),
       },
-      gcs: {
+      g: {
         type: Sequelize.STRING(1),
-        allowNull: false,
       },
-      userNic: {
-        type: Sequelize.STRING(12),
-        allowNull: false,
+      c: {
+        type: Sequelize.STRING(1),
+      },
+      s: {
+        type: Sequelize.STRING(1),
       },
       test_depts: {
         type: Sequelize.JSON,
@@ -41,15 +42,17 @@ module.exports = (sequelize, Sequelize) => {
       },
       createdAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
       updatedAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
     });
   
     Etuform.associate = (models) => {
-      models.etuform.belongsTo(models.patient, {foriegnKey: 'patientNic'});
-      models.etuform.belongsTo(models.user, {foriegnKey: 'userNic'})
+      Etuform.belongsTo(models.patient);
+      Etuform.belongsTo(models.doctor);
     }
     return Etuform;
   };

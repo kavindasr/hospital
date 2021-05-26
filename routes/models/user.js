@@ -4,30 +4,28 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(12),
         primaryKey: true,
       },
-      user_name: {
+      name: {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
-      pswrd: {
+      password: {
         type: Sequelize.STRING(450),
-        allowNull: false,
-      },
-      role_id: {
-        type: Sequelize.STRING(20),
         allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
       updatedAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
     });
     
     User.associate = (models) => {
-      models.user.hasMany(models.request, {onDelete: 'cascade', foreignKey: 'userNic'});
-      models.user.hasMany(models.etuform, {onDelete: 'cascade', foreignKey: 'userNic'});
-      models.user.hasMany(models.checkup, {onDelete: 'cascade', foreignKey: 'userNic'});
+      User.hasOne(models.doctor);
+      User.hasOne(models.nurse);
+      User.hasOne(models.dWoker);
     }
     return User;
   };
