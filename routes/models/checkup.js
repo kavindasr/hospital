@@ -46,6 +46,13 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATE,
         allowNull: true,
       },
+      patientNic: {
+        type: Sequelize.STRING(12),
+        allowNull: true,
+      },
+      nurseId: {
+        type: Sequelize.INTEGER,
+      },
     });
   
     Checkup.associate = (models) => {

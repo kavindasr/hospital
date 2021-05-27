@@ -22,14 +22,14 @@ module.exports = (sequelize, Sequelize) => {
       so2: {
         type: Sequelize.DECIMAL(6,3),
       },
-      g: {
-        type: Sequelize.STRING(1),
+      eye: {
+        type: Sequelize.INTEGER,
       },
-      c: {
-        type: Sequelize.STRING(1),
+      verbal: {
+        type: Sequelize.INTEGER,
       },
-      s: {
-        type: Sequelize.STRING(1),
+      motor: {
+        type: Sequelize.INTEGER,
       },
       test_depts: {
         type: Sequelize.JSON,
@@ -46,6 +46,17 @@ module.exports = (sequelize, Sequelize) => {
       },
       updatedAt: {
         type: Sequelize.DATE,
+        allowNull: true,
+      },
+      doctorId: {
+        type: Sequelize.INTEGER,
+      },
+      patientNic: {
+        type: Sequelize.STRING(12),
+        allowNull: true,
+      },
+      status: {
+        type: Sequelize.STRING(10),
         allowNull: true,
       },
     });

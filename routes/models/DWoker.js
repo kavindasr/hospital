@@ -13,6 +13,13 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.DATE,
             allowNull: true,
         },
+        departmentId: {
+            type: Sequelize.INTEGER,
+        },
+        userNic: {
+            type: Sequelize.STRING(12),
+            allowNull: true,
+        },
     });
     DWoker.associate = (models) => {
         DWoker.belongsTo(models.user);

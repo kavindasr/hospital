@@ -36,6 +36,18 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATE,
         allowNull: true,
       },
+      departmentId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      patientNic: {
+        type: Sequelize.STRING(12),
+        allowNull: true,
+      },
+      etuformId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
     });
   
     Request.associate = (models) => {
