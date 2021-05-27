@@ -16,10 +16,10 @@ router.post('/login', async (req, res, next) => {
             next(ApiError.unprocessableEntity(error));
             return;
         }
-        const { token, user, page } = await loginService(value);
+        const { token, user } = await loginService(value);
         res.cookie('token', token, { maxAge: timer, httpOnly: true });
         res.status(302);
-        res.redirect(page);
+        res.redirect(user.role.homepage);
     } catch (err) {
         next(err);
     }

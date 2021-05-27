@@ -13,6 +13,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.DATE,
             allowNull: true,
         },
+        userNic: {
+            type: Sequelize.STRING(12),
+            allowNull: true,
+        },
     });
     Nurse.associate = (models) => {
         Nurse.belongsTo(models.user);

@@ -8,11 +8,15 @@ module.exports = (sequelize, Sequelize) => {
         createdAt: {
             type: Sequelize.DATE,
             allowNull: true,
-          },
-          updatedAt: {
+        },
+        updatedAt: {
             type: Sequelize.DATE,
             allowNull: true,
-          },
+        },
+        userNic: {
+            type: Sequelize.STRING(12),
+            allowNull: true,
+        },
     });
     Doctor.associate = (models) => {
         Doctor.belongsTo(models.user);

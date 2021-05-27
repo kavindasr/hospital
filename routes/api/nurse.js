@@ -22,7 +22,7 @@ router.get('/checkup', (req, res, next) => {
 });
 
 // home page
-router.get('/home', accessControl([ ROLES['Nurse'].role_id ]), (req, res, next) => {
+router.get('/home', (req, res, next) => {
     const user = req.user;
     res.render('nurse/home', user);
 });
@@ -56,14 +56,15 @@ router.put('/updatePatient/:nic', async (req, res, next) => {
     }
 });
 
-router.post('/checkup', accessControl([ ROLES['Nurse'].role_id ]), async (req, res, next) => {
+router.post('/checkup', async (req, res, next) => {
     try {
+        console.log(req.user.role.id)
         const { value, error } = checkupSchema.validate(req.body);
         if (error) {
             next(ApiError.unprocessableEntity(error));
             return;
         }
-        await checkupService(value, req.user.nic);
+        await checkupService(value, req.user.role.id);
         res.status(201).send('Checkup completed');
     } catch (err) {
         console.log(err);
