@@ -12,12 +12,12 @@ const etuformSchema = Joi.object().keys({
     test_depts: Joi.array(),
     severity: Joi.string().max(50),
     asgn_ward: Joi.string().max(50),
-    // special_note: Joi.string().max(200),
+    special_note: Joi.string().max(200),
     status: Joi.string().max(50),
 });
 
 const test_deptSchema = Joi.array().items(Joi.object().keys({
-    dept_id: Joi.number().required(),
+    departmentId: Joi.number().required(),
     test_type: Joi.string().required(),
 }));
 
