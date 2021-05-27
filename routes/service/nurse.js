@@ -22,14 +22,14 @@ const updateService = async (nic, body) => {
     await patient.save();
 }
 
-const checkupService = async (body, nurse_nic) => {
+const checkupService = async (body,id) => {
     const database = await getDatabase();
     const patient = await database.patient.findOne({
         where: { nic: body.patientNic}
     });
     if (!patient) throw ApiError.badRequest({message: 'Register user first'});
 
-    body.nurse_nic = nurse_nic;
+    body.nurseId = id;
     await database.checkup.create(body);
 }
 
