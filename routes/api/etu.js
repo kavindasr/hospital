@@ -6,7 +6,7 @@ const accessControl = require('../middleware/access');
 const ROLES = require('../enums/role');
 
 // home page
-router.get('/home', accessControl([ ROLES['ETU User'].role_id ]), (req, res, next) => {
+router.get('/home', (req, res, next) => {
     const user = req.user;
     res.render('etu/home', user);
 });
@@ -17,14 +17,13 @@ router.get('/etuform', (req, res, next) => {
 });
 
 router.post('/etuform', async (req, res, next) => {
-    console.log(req.body,typeof(req.body.observation))
     try {
         const { value, error } = etuformSchema.validate(req.body);
         if (error) {
             next(ApiError.unprocessableEntity(error));
             return;
         }
-        await etuformService(value, req.user.nic);
+        await etuformService(value, req.user.role.id);
         res.status(201).send('Form submitted');
     } catch (err) {
         console.log(err);

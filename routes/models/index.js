@@ -39,7 +39,7 @@ const initializeDatabase = async () => {
     throw err;
   }
   console.log('Database connection has been established successfully.');
-
+  // sequelize.sync({force: true});
   db.sequelize = sequelize;
   db.Sequelize = Sequelize;
 

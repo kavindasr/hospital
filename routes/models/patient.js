@@ -41,11 +41,22 @@ module.exports = (sequelize, Sequelize) => {
       },
       createdAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
       updatedAt: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
     });
-  
+    
+    Patient.associate = (models) => {
+      Patient.hasMany(models.etuform, { onDelete: 'cascade'});
+      Patient.hasMany(models.checkup, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
+      
+    }
     return Patient;
   };
