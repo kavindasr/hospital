@@ -1,13 +1,17 @@
 const { getDatabase } = require('../helpers/get_database');
 const ApiError = require('../helpers/ApiError');
 
-const viewReqsService = async (userRole, nic) => {
+const viewReqsService = async (departmentId, patientNic) => {
     const database = await getDatabase();
     //console.log(database);
     const requests = await database.request.findAll({
-        include: [{model: database.patient}],
+        where: {
+            patientNic,
+            departmentId
+        },
+        include: [{model: database.patient}, {model: database.etuform}],
     });
-    console.log(requests);
+
     return requests;
 }
 

@@ -1,7 +1,8 @@
+const { Op } = require("sequelize");
 const { getDatabase } = require('../helpers/get_database');
 const ApiError = require('../helpers/ApiError');
 const { test_deptSchema } = require('../validation/etu')
-
+const {getEtuform, getCheckup} = require('./comman')
 // const build_test_depts = (arr) => {
 //     const test_depts = [];
 //     var obj = {};
@@ -59,6 +60,31 @@ const etuformService = async (body, etu_doc) => {
     return;
 }
 
+const finalReport = async (patientNic, visit_date) => {
+    const database = await getDatabase();
+    const patient = await database.patient.findOne({
+        where: { nic: patientNic}
+    });
+    if (!patient) throw ApiError.badRequest({message: 'Register user first'});
+
+    const etuform = await getEtuform(patientNic, visit_date);
+    const checkup = await getCheckup(patientNic, visit_date);
+    const requests = await database.request.findAll({
+        where: {
+            etuformId: etuform.id
+        }
+    });
+    var etuObj = etuform.dataValues;
+    const reqObj = [];
+    requests.forEach(req => {
+        reqObj.push(req.dataValues)
+    })
+    etuObj.checkup = checkup.dataValues;
+    etuObj.requests = reqObj;
+    return etuObj;
+}
+
 module.exports = {
     etuformService,
+    finalReport,
 }

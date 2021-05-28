@@ -15,10 +15,10 @@ const getCheckup = async (patientNic, visitDate) => {
         where: {
             [Op.and]: [
                 { patientNic },
-                { visit_date: visitDate }
+                { visit_date: new Date(visitDate)}
             ]
         },
-        include: [{model: database.user, attributes: ['nic', 'user_name', 'role_id']}],
+        include: [{model: database.nurse}, {model: database.patient}],
     });
     return checkup;
 }
@@ -29,10 +29,10 @@ const getEtuform = async (patientNic, visitDate) => {
         where: {
             [Op.and]: [
                 { patientNic },
-                { visit_date: visitDate }
+                { visit_date: new Date(visitDate) }
             ]
         },
-        include: [{model: database.user, attributes: ['nic', 'user_name', 'role_id']}],
+        include: [{model: database.doctor}, {model: database.patient}],
     });
     return form;
 }
