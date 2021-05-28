@@ -24,6 +24,7 @@ module.exports = (sequelize, Sequelize) => {
     DWoker.associate = (models) => {
         DWoker.belongsTo(models.user);
         DWoker.belongsTo(models.department);
+        DWoker.hasMany(models.request);
     }
 
     return DWoker;

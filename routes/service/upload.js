@@ -2,21 +2,17 @@ const { getDatabase } = require('../helpers/get_database');
 const { Op } = require('sequelize');
 const ApiError = require('../helpers/ApiError');
 
-const requestService = async (body, file, patientNic, req_date, exam_by, dept_id) => {
+const requestService = async (body, file, request_id, dWoker) => {
     const database = await getDatabase();
     const request = await database.request.findOne({
         where: {
-            [Op.and]: [
-                {patientNic},
-                {dept_id},
-                {req_date},
-            ]
+            id: request_id
         }
     });
     if (!request) throw ApiError.badRequest({message: 'Request not found'});
 
     request.test_status = body.test_status;
-    request.userNic = exam_by;
+    request.dWokerId = dWoker.id;
     request.attach = file.path;
     request.formdata = body.formdata;
 
