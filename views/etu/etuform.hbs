@@ -48,7 +48,7 @@
                     <form method="POST" action="/etu/etuform" class="row g-3">   
                         <div class="col-md-12">
                             <label for="validationDefault01" class="form-label">Patient NIC Number</label>
-                            <input name="nic" type="text" class="form-control" id="validationDefault01" required>
+                            <input name="patientNic" type="text" class="form-control" id="validationDefault01" required>
                         </div>
                         <!-- <hr class="my-4"> -->
 
@@ -97,111 +97,158 @@
                               <input name="observation"  class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Oedema" >
                               <label class="form-check-label" for="inlineCheckbox3">Oedema</label>
                             </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="validationDefault03" class="form-label">Pupils</label>
-                            <input name="pupils" type="text" class="form-control" id="validationDefault03">
-                        </div>
-                        <div class="col-md-4">
-                          <label for="validationDefault03" class="form-label">SO2</label>
-                          <input name="so2" type="text" class="form-control" id="validationDefault03">
                       </div>
-                        <div class="col-md-4">
-                            <label for="validationDefault04" class="form-label">GCS</label>
-                            <select name="gcs" class="form-select" id="validationDefault04" required>
-                            <option selected disabled value="">Choose...</option>
-                            <option>E</option>
-                            <option>V</option>
-                            <option>M</option>
-                            </select>
-                        </div>
 
-                        <div class="col-12">
+                      <div class="col-md-6">
+                          <label for="validationDefault03" class="form-label">Pupils</label>
+                          <input name="pupils" type="text" class="form-control" id="validationDefault03">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="validationDefault03" class="form-label">SO2</label>
+                        <input name="so2" type="text" class="form-control" id="validationDefault03">
+                      </div>
+
+                      <div class="col-md-4">
+                        <label for="validationDefault03" class="form-label">Eyes</label>
+                        <input name="eye" type="eyes" class="form-control" id="validationDefault03">
+                      </div>
+                      <div class="col-md-4">
+                        <label for="validationDefault03" class="form-label">Verbal</label>
+                        <input name="verbal" type="verbal" class="form-control" id="validationDefault03">
+                      </div> 
+                      <div class="col-md-4">
+                        <label for="validationDefault03" class="form-label">Motor</label>
+                        <input name="motor" type="motor" class="form-control" id="validationDefault03">
+                      </div>
+
+                      <div class="col-md-4">
+                        <label for="validationDefault03" class="form-label">Special Notes</label>
+                        <input name="special_note" type="motor" class="form-control" id="validationDefault03">
+                      </div>
+
+                      <div class="col-md-4">
+                        <label for="validationDefault03" class="form-label">Severity</label>
+                        <input name="severity" type="motor" class="form-control" id="validationDefault03">
+                      </div>
+
+                      <div class="col-md-12">
                         <label for="inputAddress2" class="form-label">Requsted Tests</label>
+                      </div>
+    
 
-                        <div class="input-group mb-3">
-                          <div class="input-group-text">
-                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="3" aria-label="Checkbox for following text input">
+                        <div class="input-group mb-3" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '5', 'test_type': 'blood test'}" aria-label="Checkbox for following text input">
                           </div>
-                          <label class="input-group-text" for="inputGroupSelect01">Blood Bank</label>
-                          <select name="test_depts" class="form-select" id="inputGroupSelect01">
-                            <option selected disabled>Choose...</option>
-                            <option>Test Type One</option>
-                            <option>Test Type Two</option>
-                            <option>Test Type Three</option>
-                          </select>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">Hormones and Tumor Markers(Dept of Chemical & Pathology)</label>
                         </div>
 
-                        <div class="input-group mb-3">
-                          <div class="input-group-text">
-                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="4" aria-label="Checkbox for following text input">
+                        <div class="input-group mb-3" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '5', 'test_type': 'blood test'}" aria-label="Checkbox for following text input">
                           </div>
-                          <label class="input-group-text" for="inputGroupSelect01">ECG Department</label>
-                          <select name="test_depts" class="form-select" id="inputGroupSelect01">
-                            <option selected disabled>Choose...</option>
-                            <option>Test Type One</option>
-                            <option>Test Type Two</option>
-                            <option>Test Type Three</option>
-                          </select>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">FBC(Dept of Chemical & Pathology)</label>
                         </div>
 
-                        <div class="input-group mb-3">
-                          <div class="input-group-text">
-                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="5" aria-label="Checkbox for following text input">
+                        <div class="input-group mb-3 ">
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '5', 'test_type': 'blood test'}" aria-label="Checkbox for following text input">
                           </div>
-                          <label class="input-group-text" for="inputGroupSelect01">Biology Department</label>
-                          <select name="test_depts" class="form-select" id="inputGroupSelect01">
-                            <option selected disabled>Choose...</option>
-                            <option>Test Type One</option>
-                            <option>Test Type Two</option>
-                            <option>Test Type Three</option>
-                          </select>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">CRP (Dept of Chemical & Pathology)</label>
+                        </div>
+
+                        <div class="input-group mb-3 col-md-12" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '5', 'test_type': 'Pathology test'}" aria-label="Checkbox for following text input">
+                          </div>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">Pathology (Dept of Chemical & Pathology)</label>
+                        </div>
+
+                        <div class="input-group mb-3" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '5', 'test_type': 'HBAC test'}" aria-label="Checkbox for following text input">
+                          </div>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">HBAC (Dept of Chemical & Pathology)</label>
                         </div>
 
                         <div class="input-group mb-3">
-                          <div class="input-group-text">
-                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="6" aria-label="Checkbox for following text input">
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '5', 'test_type': 'Blood Sugar test'}" aria-label="Checkbox for following text input">
                           </div>
-                          <label class="input-group-text" for="inputGroupSelect01">Radiology Department</label>
-                          <select name="test_depts" class="form-select" id="inputGroupSelect01">
-                            <option selected disabled>Choose...</option>
-                            <option>Test Type One</option>
-                            <option>Test Type Two</option>
-                            <option>Test Type Three</option>
-                          </select>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">Blood Sugar (Dept of Chemical & Pathology)</label>
+                        </div>
+
+                        <div class="input-group mb-3" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '5', 'test_type': 'Lipid test'}" aria-label="Checkbox for following text input">
+                          </div>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">Lipid Profile (Dept of Chemical & Pathology)</label>
+                        </div>
+
+                        <div class="input-group mb-3" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '5', 'test_type': 'URF,SFR,EFR,CSF test'}" aria-label="Checkbox for following text input">
+                          </div>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">URF,SFR,EFR,CSF (Dept of Chemical & Pathology)</label>
                         </div>
 
                         <div class="input-group mb-3">
-                          <div class="input-group-text">
-                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="7" aria-label="Checkbox for following text input">
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '2', 'test_type': 'ECG test'}" aria-label="Checkbox for following text input">
                           </div>
-                          <label class="input-group-text" for="inputGroupSelect01">Chemical Pathology</label>
-                          <select name="test_depts" class="form-select" id="inputGroupSelect01">
-                            <option selected disabled>Choose...</option>
-                            <option>Test Type One</option>
-                            <option>Test Type Two</option>
-                            <option>Test Type Three</option>
-                          </select>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">ECG (Dept of ElectroCardio Graph)</label>
                         </div>
 
+                        <div class="input-group mb-3" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '4', 'test_type': 'X-Ray test'}" aria-label="Checkbox for following text input">
+                          </div>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">X-Ray (Dept of Radiology)</label>
                         </div>
 
+                        <div class="input-group mb-3" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '4', 'test_type': 'CT test'}" aria-label="Checkbox for following text input">
+                          </div>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">CT (Dept of Radiology)</label>
+                        </div>
+
+                        <div class="input-group mb-3">
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '4', 'test_type': 'Ultra sound test'}" aria-label="Checkbox for following text input">
+                          </div>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">Ultra sound (Dept of Radiology)</label>
+                        </div>
+
+                        <div class="input-group mb-3" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '3', 'test_type': 'Covid 19 test'}" aria-label="Checkbox for following text input">
+                          </div>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">Covid 19 (Dept of Micro Biology)</label>
+                        </div>
+
+                        <div class="input-group mb-3" >
+                          <div class="input-group-text col-md-1">
+                            <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="{'departmentId': '3', 'test_type': 'URINE test'}" aria-label="Checkbox for following text input">
+                          </div>
+                          <label class="input-group-text col-md-11" for="inputGroupSelect01">URINE (Dept of Micro Biology)</label>
+                        </div>
 
                         <div class="col-12">
-                            <div class="form-check">
+                          <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
                             <label class="form-check-label" for="invalidCheck2">
                                 Above details are correct
                             </label>
-                            </div>
+                          </div>
                         </div>
+
                         <div class="col-12">
                             <button class="btn btn-primary" type="submit">Submit form</button>
                         </div>
-                    </form>
-                    </div>
+                  </form>
                 </div>
+              </div>
             </div>
         </div>
 
