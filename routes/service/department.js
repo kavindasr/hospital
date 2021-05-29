@@ -9,7 +9,6 @@ const viewReqsService = async (departmentId, patientNic) => {
             patientNic,
             departmentId
         },
-        include: [{model: database.patient}, {model: database.etuform}],
     });
 
     return requests;
