@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const ApiError = require('../helpers/ApiError');
 const { etuformSchema } = require('../validation/etu');
-const { etuformService } = require('../service/etu');
+const { nicSchema } = require('../validation/department');
+const { etuformService, finalReport } = require('../service/etu');
 const accessControl = require('../middleware/access');
 const ROLES = require('../enums/role');
 
@@ -31,4 +32,20 @@ router.post('/etuform', async (req, res, next) => {
     }
 });
 
+router.get('/finalReport/:nic/:visit_date', async (req, res, next) => {
+    try{
+        const patientNic = req.params.nic;
+        const visit_date = req.params.visit_date;
+        const {value, error} = nicSchema.validate(patientNic);
+        if (error) {
+            next(ApiError.unprocessableEntity(error));
+            return;
+        } 
+        const data = await finalReport(value, visit_date);
+        res.status(200).send(data);
+    }
+    catch(err) {
+        next(err);
+    }
+});
 module.exports = router;

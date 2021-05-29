@@ -11,12 +11,13 @@ router.get('/viewReqs', async (req, res, next) => {
             next(ApiError.unprocessableEntity(error));
             return;
         } 
-        const data = await viewReqsService(req.user.role_id, value);
+        const data = await viewReqsService(req.user.role.departmentId, value);
         res.status(200).send(data);
     } catch (err) {
         console.log(err);
         next(err);
     }
 });
+
 
 module.exports = router;
