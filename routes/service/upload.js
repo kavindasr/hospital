@@ -14,7 +14,7 @@ const requestService = async (body, file, request_id, dWoker) => {
     request.test_status = body.test_status;
     request.dWokerId = dWoker.id;
     request.attach = file.path;
-    request.formdata = body.formdata;
+    request.feedback = body.feedback;
 
     await request.save();
 }

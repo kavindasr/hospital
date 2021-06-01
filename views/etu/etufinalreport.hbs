@@ -1,6 +1,46 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+        body {font-family: Arial;}
+
+        /* Style the tab */
+        .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+        background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+        background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+        }
+    </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,29 +80,109 @@
             </form>
           </div>
         </div>
-      </nav>
+    </nav>
 
       <!-- form content -->
-
-      <div class="d-flex justify-content-center">
+    {{!-- <p>{{data}}</p> --}}
+    {{!-- <p>{{data.checkup.temp}}</p>
+    <p>{{data.checkup.pulse_rate}}</p>
+    <p>{{data.checkup.resp_rate}}</p> --}}
+    <div class="d-flex justify-content-center">
         <div class="col-md-6 " style="padding-top: 30px;">
-            <div class="card">
-                <div class="card-body">
+            <form method="GET" class="row g-3" action="/etu/finalreport{{patientNic}}{{visit_date}}">
+                <div class="col-md-5">
+                    <label for="validationDefault01" class="form-label">Patient NIC Number</label>
+                    <input name="patientNic" type="text" class="form-control" id="validationDefault01" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="validationDefault02" class="form-label">Visit Date</label>
+                    <input name="visit_date" type="date" class="form-control" id="validationDefault02" required>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">SUBMIT</button>
+                </div>
+            </form>
+            
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'CheckupDetails')">Checkup Details</button>
+                <button class="tablinks" onclick="openCity(event, 'ETUFormDetails')">ETU Form Details</button>
+                <button class="tablinks" onclick="openCity(event, 'Reports')">Reports</button>
+                <button class="tablinks" onclick="openCity(event, 'PatientsDetails')">Patients Details</button>
+            </div>
 
-                    <form method="POST" action="/etu/etuform" class="row g-3">   
-                        <div class="col-md-12">
-                            <label for="validationDefault01" class="form-label">Patient NIC Number</label>
-                            <input name="patientNic" type="text" class="form-control" id="validationDefault01" required>
-                        </div>
+            <!-- Tab content -->
+            <div id="CheckupDetails" class="tabcontent">
+                <form method="POST" class="row g-3" action="/nurse/checkup">   
+                    <div class="row">
+                        <div class="col"><hr></div>  
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="validationDefault03" class="form-label">Temperature</label>
+                        <input name="temp" type="text" class="form-control" id="validationDefault03" required value={{data.checkup.temp}}>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="validationDefault03" class="form-label">Blood Pressure</label>
+                        <input name="bp" type="text" class="form-control" id="validationDefault03" value={{data.checkup.bp}}>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="validationDefault01" class="form-label">Pulse Rate</label>
+                        <input name="pulse_rate" type="text" class="form-control" id="validationDefault01" required value={{data.checkup.pulse_rate}}>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationDefault02" class="form-label">Respiratory Rate</label>
+                        <input name="resp_rate" type="text" class="form-control" id="validationDefault02" value={{data.checkup.resp_rate}}>
+                    </div>
+
+                    <div class="row">
+                        <div class="col"><hr></div>  
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="validationDefault01" class="form-label">Height</label>
+                        <input name="height" type="text" class="form-control" id="validationDefault01" required value={{data.checkup.height}}>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="validationDefault02" class="form-label">Weight</label>
+                        <input name="weight" type="text" class="form-control" id="validationDefault02"  required value={{data.checkup.weight}}>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <label for="validationDefault02" class="form-label">BMI</label>
+                        <div class="input-group mb-3">
+                            <input name="bmi" type="text" class="form-control" id="validationDefault02"  required>
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="button">Calculate</button>
+                            </div>
+                            </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Urine Test</label>
+                        <input name="urine" type="text" class="form-control" id="inputAddress" value={{data.checkup.urine}}>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Checkup done by Nurse Id</label>
+                        <input name="nurse" type="text" class="form-control" id="inputAddress" value={{data.checkup.nurse.userNic}}>
+                    </div>
+                </form>
+            </div>
+
+            <div id="ETUFormDetails" class="tabcontent">
+                <form method="POST" action="/etu/etuform" class="row g-3">   
                         <!-- <hr class="my-4"> -->
 
                         <div class="col-md-12">
                             <label for="validationDefault02" class="form-label">Any Allergies and Adverse Reactions</label>
-                            <input name="allergies" type="text" class="form-control" id="validationDefault02">
+                            <input name="allergies" type="text" class="form-control" id="validationDefault02" value={{data.allergies}}>
                         </div>
 
                         <div class="col-md-12">
-                            <label for="validationDefault04" class="form-label">Observations</label>
+                            <label for="validationDefault04" class="form-label" value={{data.observations}}>Observations</label>
                             <br>
 
                             <div class="col-md-3 form-check form-check-inline">
@@ -105,37 +225,42 @@
 
                       <div class="col-md-6">
                           <label for="validationDefault03" class="form-label">Pupils</label>
-                          <input name="pupils" type="text" class="form-control" id="validationDefault03">
+                          <input name="pupils" type="text" class="form-control" id="validationDefault03" value={{data.pupils}}>
                       </div>
                       <div class="col-md-6">
                         <label for="validationDefault03" class="form-label">SO2</label>
-                        <input name="so2" type="text" class="form-control" id="validationDefault03">
+                        <input name="so2" type="text" class="form-control" id="validationDefault03" value={{data.so2}}>
                       </div>
 
                       <div class="col-md-4">
                         <label for="validationDefault03" class="form-label">Eyes</label>
-                        <input name="eye" type="eyes" class="form-control" id="validationDefault03">
+                        <input name="eye" type="eyes" class="form-control" id="validationDefault03" value={{data.eye}}>
                       </div>
                       <div class="col-md-4">
                         <label for="validationDefault03" class="form-label">Verbal</label>
-                        <input name="verbal" type="verbal" class="form-control" id="validationDefault03">
+                        <input name="verbal" type="verbal" class="form-control" id="validationDefault03" value={{data.verbal}}>
                       </div> 
                       <div class="col-md-4">
                         <label for="validationDefault03" class="form-label">Motor</label>
-                        <input name="motor" type="motor" class="form-control" id="validationDefault03">
-                      </div>
-
-                      <div class="col-md-4">
-                        <label for="validationDefault03" class="form-label">Special Notes</label>
-                        <input name="special_note" type="motor" class="form-control" id="validationDefault03">
-                      </div>
-
-                      <div class="col-md-4">
-                        <label for="validationDefault03" class="form-label">Severity</label>
-                        <input name="severity" type="motor" class="form-control" id="validationDefault03">
+                        <input name="motor" type="motor" class="form-control" id="validationDefault03" value={{data.motor}}>
                       </div>
 
                       <div class="col-md-12">
+                        <label for="validationDefault03" class="form-label">Special Notes</label>
+                        <input name="special_note" type="motor" class="form-control" id="validationDefault03" value={{data.special_note}}>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label for="validationDefault03" class="form-label">Severity</label>
+                        <input name="severity" type="motor" class="form-control" id="validationDefault03" value={{data.severity}}>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label for="validationDefault03" class="form-label">ETU form completed by doctor Id</label>
+                        <input name="doctorId" type="motor" class="form-control" id="validationDefault03" value={{data.doctor.userNic}}>
+                      </div>
+
+                      {{!-- <div class="col-md-12">
                         <label for="inputAddress2" class="form-label">Requsted Tests</label>
                       </div>
     
@@ -236,27 +361,118 @@
                             <input name="test_depts" class="form-check-input mt-0" type="checkbox" value="/3/'URINE test'/" aria-label="Checkbox for following text input">
                           </div>
                           <label class="input-group-text col-md-11" for="inputGroupSelect01">URINE (Dept of Micro Biology)</label>
+                        </div> --}}
+                </form>
+            </div>
+
+            <div id="Reports" class="tabcontent">
+                
+            </div>
+            <div id="PatientsDetails" class="tabcontent">
+                <form method="POST" action="/nurse/register" class="row g-3">   
+                        <div class="col-md-6">
+                            <label for="validationDefault02" class="form-label">Contact Number</label>
+                            <input name="contact_no" type="number" class="form-control" id="validationDefault02" required value={{data.patient.contact_no}}>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="validationDefault04" class="form-label">Title</label>
+                            <select name="title" class="form-select" id="validationDefault04" required>
+                            <option selected disabled>{{data.patient.title}}</option>
+                            <option>Mr</option>
+                            <option>Mrs</option>
+                            <option>Miss</option>
+                            </select>
+                        </div>
+                        <div class="col-md-8">
+                            <label for="validationDefault01" class="form-label">Name</label>
+                            <input name="name" type="text" class="form-control" id="validationDefault01" required value="{{data.patient.name}}">
+                        </div>
+                        {{!-- <div class="col-md-5">
+                            <label for="validationDefault02" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="validationDefault02" value="Otto" required>
+                        </div> --}}
+
+
+                        <div class="col-md-6">
+                            <label for="validationDefault03" class="form-label">Age</label>
+                            <input name="age" type="numer" class="form-control" id="validationDefault03" required value={{data.patient.age}}>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationDefault04" class="form-label">Gender</label>
+                            <select name="gender" class="form-select" id="validationDefault04" required >
+                            <option selected disabled value="">{{data.patient.gender}}</option>
+                            <option>M</option>
+                            <option>F</option>
+                            {{!-- <option>Other</option> --}}
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationDefault04" class="form-label">Marital Status</label>
+                            <select name="marital_status" class="form-select" id="validationDefault04" required >
+                            <option selected disabled value="">{{data.patient.marital_status}}</option>
+                            <option>S</option>
+                            <option>M</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="validationDefault01" class="form-label">Patient Address</label>
+                            <input name="adrs" type="text" class="form-control" id="validationDefault01"  required value="{{data.patient.adrs}}">
+                        </div>
+                        {{!-- <div class="col-md-6">
+                            <label for="validationDefault02" class="form-label">Registered Date</label>
+                            <input type="text" class="form-control" id="validationDefault02" value="Otto" required>
+                        </div> --}}
+
+                        <div class="col-12">
+                            <label for="inputAddress" class="form-label">Gurdian Name</label>
+                            <input name="gdn_name" type="text" class="form-control" id="inputAddress" required value="{{data.patient.gdn_name}}">
                         </div>
 
                         <div class="col-12">
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                            <label class="form-check-label" for="invalidCheck2">
-                                Above details are correct
-                            </label>
-                          </div>
-                        </div>
-
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        <label for="inputAddress2" class="form-label">Guardian Address</label>
+                        <input name="gdn_adrs" type="text" class="form-control" id="inputAddress2" value="{{data.patient.gdn_adrs}}">
                         </div>
                   </form>
-                </div>
-              </div>
             </div>
         </div>
+    </div>
 
+    <script>
+        function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    </script>
         <!-- end of form content -->
+
+     
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+
+
+    <!-- end of form content -->
 
      
 

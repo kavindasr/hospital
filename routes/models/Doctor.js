@@ -25,6 +25,7 @@ module.exports = (sequelize, Sequelize) => {
               allowNull: false
             }
         });
+        Doctor.hasMany(models.request);
     }
 
     return Doctor;

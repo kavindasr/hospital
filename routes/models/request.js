@@ -22,8 +22,8 @@ module.exports = (sequelize, Sequelize) => {
         defaultValue: "Pending",
         values: ['Pending', 'Completed','Rejected'],
       },
-      formdata: {
-        type: Sequelize.JSON,
+      feedback: {
+        type: Sequelize.STRING(500),
       },
       attach: {
         type: Sequelize.STRING(200),
@@ -55,6 +55,7 @@ module.exports = (sequelize, Sequelize) => {
       Request.belongsTo(models.department);
       Request.belongsTo(models.etuform);
       Request.belongsTo(models.dWoker);
+      Request.belongsTo(models.doctor);
     }
     return Request;
   };
