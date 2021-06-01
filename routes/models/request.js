@@ -22,8 +22,8 @@ module.exports = (sequelize, Sequelize) => {
         defaultValue: "Pending",
         values: ['Pending', 'Completed','Rejected'],
       },
-      formdata: {
-        type: Sequelize.JSON,
+      feedback: {
+        type: Sequelize.STRING(500),
       },
       attach: {
         type: Sequelize.STRING(200),
