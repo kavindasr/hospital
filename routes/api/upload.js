@@ -29,15 +29,17 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-router.put('/formData/:req_id', upload.single('attach'), async (req, res, next) => {
+router.post('/formData', upload.single('attach'), async (req, res, next) => {
     try{
         const { value, error } = uploadSchema.validate(req.body);
         if (error) {
             next(ApiError.unprocessableEntity(error));
             return;
         }
-        await requestService(value, req.file, req.params.req_id, req.user.role);
-        res.status(201).send('Complete the request');
+        await requestService(value, req.file, req.body.reqId, req.user.role);
+        console.log(req.file);
+        const success = {message:"Test Completed Successfully"}
+        res.status(201).render('departments/request', {success});   
     } catch (err) {
         next(err);
     }
