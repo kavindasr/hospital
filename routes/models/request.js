@@ -55,6 +55,7 @@ module.exports = (sequelize, Sequelize) => {
       Request.belongsTo(models.department);
       Request.belongsTo(models.etuform);
       Request.belongsTo(models.dWoker);
+      Request.belongsTo(models.doctor);
     }
     return Request;
   };

@@ -46,6 +46,7 @@ const etuformService = async (body, etu_doc) => {
             test_type: dept.test_type,
             special_note: body.special_note,
             etuformId: form.id,
+            doctorId: etu_doc,
         }
         requests.push(reqeust);
     });
