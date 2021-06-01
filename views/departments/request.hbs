@@ -14,7 +14,7 @@
 
 
 
-    <title>ECG Department</title>
+    <title>Blood Bank</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -26,10 +26,10 @@
             <a class="navbar-brand" href="#">DGH</a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/nurse/home">Home</a>
+                <a class="nav-link active" aria-current="page" href="/dpt/bldbank_home">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/nurse/register">Test Request</a>
+                <a class="nav-link" href="/dpt/request">Test Request</a>
               </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -49,13 +49,12 @@
       </nav>
 
       <div class="p-2 m-3 d-flex justify-content-center ">
-      <form class="row g-3">
+      <form method="GET" action = " /dpt/viewReqs?nic=199721003446" class="row g-3">
         <div class="col-auto">
           <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Enter Patient NIC">
         </div>
         <div class="col-auto">
-          <label for="inputPassword2" class="visually-hidden">Password</label>
-          <input type="password" class="form-control" id="inputPassword2" placeholder="NIC">
+          <input name="nic" type="text" class="form-control" id="inputPassword2" placeholder="NIC">
         </div>
         <div class="col-auto">
           <button type="submit" class="btn btn-primary mb-3">Search Requests</button>
@@ -63,37 +62,46 @@
       </form>
     </div>
 
+    {{#if err.message}}
+      <div class="d-flex justify-content-center"><p class="text-danger fw-bold">{{err.message}}</p></div>
+    {{/if}}
+
+    {{#if error.message}}
+        <div class="d-flex justify-content-center"><p class="text-danger fw-bold">{{error.message}}</p></div>
+    {{/if}}
+
+  
+
     <div class="p-1 m-3">
     <div class="card bg-light">
         <div class="card-body">
             <form>
-
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputEmail3" value="Dias Perera" disabled>
+                    <input name="name" type="text" class="form-control" id="inputEmail3" value={{data.patient.name}}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-sm-2 col-form-label">Address</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPassword3" value="123/2, Kurunegla,Kugala" disabled>
+                    <input name="adrs" type="text" class="form-control" id="inputPassword3" value={{data.patient.adrs}}>
                   </div>
                 </div>
                 <div class="row mb-3">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Gender</label>
                     <div class="col-sm-2">
-                      <input type="text" class="form-control" id="inputPassword3" value="Male" disabled>
+                      <input type="text" class="form-control" id="inputPassword3" value={{data.patient.gender}}>
                     </div>
 
                     <label for="inputPassword3" class="col-sm-1 col-form-label">Age</label>
                     <div class="col-sm-2">
-                      <input type="text" class="form-control" id="inputPassword3" value="56" disabled>
+                      <input type="text" class="form-control" id="inputPassword3" value={{data.patient.age}}>
                     </div>
 
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Contact No</label>
                     <div class="col-sm-3">
-                      <input type="text" class="form-control" id="inputPassword3" value="077677112" disabled>
+                      <input type="text" class="form-control" id="inputPassword3" value={{data.patient.contact_no}}>
                     </div>
                   </div>
               </form>
@@ -101,12 +109,19 @@
       </div>
     </div>
 
+    {{#if data.problem.message}}
+       <div class="d-flex justify-content-center"><p class="text-danger fw-bold">{{data.problem.message}}</p></div>
+    {{/if}}
+
+
       <div class="p-3 m-3">
       <div class="table-responsive table-success table-striped">
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Date</th>
+                    <th scope="col">Requset ID</th>
+                    <th scope="col">ETU Form ID</th>
                     <th scope="col">Test Type</th>
                     <th scope="col">Special Note</th>
                     <th scope="col">Requested By</th>
@@ -114,33 +129,77 @@
                 </tr>
             </thead>
               <tbody>
-                <!-- <tr class="table-active">
-                  ...
-                </tr> -->
+
+            {{#if data.requests}}
+                {{#each data.requests}}
+                                   
                 <tr>
-                    <th scope="row">2021-12-12</th>
-                    <td>Spec ECG</td>
-                    <td>This is a speccial test</td>
+                    <th scope="row">{{this.req_date}}</th>
+                    <td>{{this.id}}</td>
+                    <td>{{this.etuformId}}</td>
+                    <td>{{this.test_type}}</td>
+                    <td>{{this.special_note}}</td>
                     <td>Gayan Bob</td>
                     <td>
-                        <button type="button" class="btn btn-success"><i class="fas fa-check-circle"></i> &nbsp; Accept</button>
+                      <button type="button" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <i class="fas fa-check-circle"></i> &nbsp; Accept
+                      </button>
                         <button type="button" class="btn btn-danger"><i class="fas fa-times-circle"></i> &nbsp; Decline</button>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2021-12-12</th>
-                    <td>Spec ECG</td>
-                    <td>This is a speccial test</td>
-                    <td>Gayan Bob</td>
-                    <td>
-                        <button type="button" class="btn btn-success"><i class="fas fa-check-circle"></i> &nbsp; Accept</button>
-                        <button type="button" class="btn btn-danger"><i class="fas fa-times-circle"></i> &nbsp; Decline</button>
-                    </td>
-                </tr>
+
+                {{/each}}
+              {{/if}}
+              
               </tbody>
         </table>
       </div>
     </div>   
+
+     <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Test Results</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <form method="PUT" action="/upload/formData/1">   
+
+              <div class="modal-body">
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Test Num</span>
+                  <input name="formdata" type="number" class="form-control" aria-label="test" aria-describedby="basic-addon1">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Diagnosis</span>
+                  <textarea name="formdata" class="form-control" aria-label="With textarea"></textarea>
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Treatment</span>
+                  <input name="test_status" type="text" class="form-control" aria-label="diagnosis" aria-describedby="basic-addon1">
+                </div>
+
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">Test Report Attachment</label>
+                    <input name = "attach" class="form-control" type="file" id="formFile">
+                  </div>            
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
