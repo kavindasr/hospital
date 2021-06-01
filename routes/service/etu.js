@@ -30,7 +30,13 @@ const etuformService = async (body, etu_doc) => {
     if (!patient) throw ApiError.badRequest({message: 'Register user first'});
 
     var test_depts = body.test_depts // build_test_depts(body.test_depts);
-    const { value, error } = test_deptSchema.validate(test_depts);
+    const testtypes = [];
+    test_depts.forEach(dept => {
+        let departmenttype = dept.split(/[",/']/)
+        testtypes.push({departmentId : departmenttype[1], test_type: departmenttype[3]}) 
+    })
+    console.log(testtypes)
+    const { value, error } = test_deptSchema.validate(testtypes);
     if (error) throw ApiError.unprocessableEntity(error);
     test_depts = value;
     

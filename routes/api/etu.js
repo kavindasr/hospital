@@ -32,17 +32,22 @@ router.post('/etuform', async (req, res, next) => {
     }
 });
 
-router.get('/finalReport/:nic/:visit_date', async (req, res, next) => {
+router.get('/etufinalreport', (req, res, next) => {
+    res.status(200).render('etu/etufinalreport', {});
+});
+
+router.get('/finalreport', async (req, res, next) => {
     try{
-        const patientNic = req.params.nic;
-        const visit_date = req.params.visit_date;
+        const patientNic = req.query.patientNic;
+        const visit_date = req.query.visit_date;
         const {value, error} = nicSchema.validate(patientNic);
         if (error) {
             next(ApiError.unprocessableEntity(error));
             return;
         } 
         const data = await finalReport(value, visit_date);
-        res.status(200).send(data);
+        res.status(200).render('etu/etufinalreport', {data});
+        //res.status(200).send(data);
     }
     catch(err) {
         next(err);
