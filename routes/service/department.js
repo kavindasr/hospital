@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 const viewReqsService = async (departmentId, patientNic) => {
     const database = await getDatabase();
     const patient = await database.patient.findOne({
-        where: { nic: body.patientNic}
+        where: { nic: patientNic}
     });
     if (!patient) throw ApiError.notfound({message: 'Patient not found'});
 
@@ -17,12 +17,11 @@ const viewReqsService = async (departmentId, patientNic) => {
                 { test_status: "Pending"}
             ]
         },
-        include: [{model: database.patient}, {model: database.doctor}],
+        include: [{model: database.doctor}],
     });
 
-    if(requests.length == 0) throw ApiError.notfound({message: 'No requests found'});
-    
-    return requests;
+    if(requests.length == 0) throw ApiError.notfound({message: `No requests found from NIC ${patientNic}- ${patient.name}`});
+    return {patient, requests};
 }
 
 module.exports = {
