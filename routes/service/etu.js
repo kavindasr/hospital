@@ -91,7 +91,30 @@ const finalReport = async (patientNic, visit_date) => {
     return etuObj;
 }
 
+const completeEtuForm = async ({id, status}) => {
+    const database = await getDatabase();
+    const etuform = await database.etuform.findOne({
+        where: { id }
+    });
+    if(!etuform) throw ApiError.notfound({message: 'Etu form not found'});
+
+    etuform.status = status;
+    await etuform.save();
+}
+
+const admittedPatients = async () => {
+    const database = await getDatabase();
+    const etuforms = await database.etuform.findAll({
+        where: {
+            status: 'Admitted'
+        }
+    })
+    return etuforms;
+}
+
 module.exports = {
     etuformService,
     finalReport,
+    completeEtuForm,
+    admittedPatients,
 }
