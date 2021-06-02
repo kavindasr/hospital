@@ -91,7 +91,7 @@ const finalReport = async (patientNic, visit_date) => {
     return etuObj;
 }
 
-const completeEtuForm = async ({id, status}) => {
+const completeEtuForm = async ({id, status, asgn_ward}) => {
     const database = await getDatabase();
     const etuform = await database.etuform.findOne({
         where: { id }
@@ -99,6 +99,7 @@ const completeEtuForm = async ({id, status}) => {
     if(!etuform) throw ApiError.notfound({message: 'Etu form not found'});
 
     etuform.status = status;
+    etuform.asgn_ward = asgn_ward;
     await etuform.save();
 }
 
