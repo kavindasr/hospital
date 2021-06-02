@@ -21,6 +21,12 @@ const test_deptSchema = Joi.array().items(Joi.object().keys({
     test_type: Joi.string().required(),
 }));
 
+const etuCompletionSchema = Joi.object().keys({
+    id: Joi.number().integer().required(),
+    asgn_ward: Joi.string(),
+    status: Joi.string().valid('Admitted', 'Discharged').required(),
+});
+
 module.exports = {
     etuformSchema,
     test_deptSchema,
