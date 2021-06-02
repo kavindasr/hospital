@@ -55,9 +55,34 @@ router.get('/finalreport', async (req, res, next) => {
     }
 });
 
-router.post('/completeEtuForm', async (req, res, next) => {
-    try{
-        const {value, error} = etuCompletionSchema.validate(req.body);
++router.post('/dischargeEtuForm', async (req, res, next) => {
+    try{   
+        const body = {
+            id : req.query.id,
+            asgn_ward : "CCunit",
+            status : "Discharged"
+        }   
+        const {value, error} = etuCompletionSchema.validate(body);
+        if (error) {
+            next(ApiError.unprocessableEntity(error));
+            return;
+        } 
+        await completeEtuForm(value);
+        res.status(200).send('Successfully completed');
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+router.post('/admitEtuForm', async (req, res, next) => {
+    try{        
+        const body = {
+            id : req.query.id,
+            asgn_ward : "CCunit",
+            status : "Admitted"
+        }  
+        const {value, error} = etuCompletionSchema.validate(body);
         if (error) {
             next(ApiError.unprocessableEntity(error));
             return;
