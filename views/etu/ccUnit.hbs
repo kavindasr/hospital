@@ -44,6 +44,35 @@
         </div>
       </nav>
 
+      <div class="d-flex justify-content-center">
+        <div class="col-md-6 " style="padding-top: 30px;">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">Patient NIC</th>
+                      <th scope="col">Severity</th>
+                      <th scope="col">Visit Date</th>
+                  </tr>
+              </thead>
+                <tbody>
+
+              {{#if data}}
+                  {{#each data}}
+                                    
+                  <tr>
+                      <td>{{this.patientNic}}</td>
+                      <td>{{this.severity}}</td>
+                      <td>{{this.visit_date}}</td>
+                  </tr>
+
+                  {{/each}}
+                {{/if}}
+                
+                </tbody>
+          </table>
+        </div>
+      </div>
+
     
 
     <!-- Optional JavaScript; choose one of the two! -->
