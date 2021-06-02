@@ -104,4 +104,14 @@ router.get('/ccUnit', async (req, res, next) => {
         next(err);
     }
 });
+
+router.get('/ccUnit', async (req, res, next) => {
+    try{
+        const data = await admittedPatients();
+        res.status(200).render('etu/ccUnit', {data});
+    }
+    catch(err) {
+        next(err);
+    }
+});
 module.exports = router;
