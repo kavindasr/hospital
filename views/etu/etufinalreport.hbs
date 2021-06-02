@@ -72,6 +72,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="/etu/etufinalreport">Final Report</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/etu/ccUnit">CC Unit</a>
+              </li>
               
             </ul>
             <form class="d-flex">
@@ -369,7 +372,8 @@
                 
             </div>
             <div id="PatientsDetails" class="tabcontent">
-                <form method="POST" action="/nurse/register" class="row g-3">   
+                <div class="col-12">
+                  <form method="POST" action="/nurse/register" class="row g-3">   
                         <div class="col-md-6">
                             <label for="validationDefault02" class="form-label">Contact Number</label>
                             <input name="contact_no" type="number" class="form-control" id="validationDefault02" required value={{data.patient.contact_no}}>
@@ -435,6 +439,20 @@
                         <input name="gdn_adrs" type="text" class="form-control" id="inputAddress2" value="{{data.patient.gdn_adrs}}">
                         </div>
                   </form>
+                </div>
+                <div class="row col-12">
+                      <div class="col-6">
+                        <form method="POST" action="/etu/dischargeEtuForm?id={{data.id}}" style="display:flex; justify-content:center; padding:5px">
+                              <button class="btn btn-success" type="submit">Discharge</button>
+                        </form>
+                      </div>
+
+                      <div class="col-6">
+                          <form method="POST" action="/etu/admitEtuForm?id={{data.id}}" style="display:flex; justify-content:center; padding:5px">
+                                <button class="btn btn-danger" type="submit">Admit</button>
+                          </form>
+                      </div>
+                </div>
             </div>
         </div>
     </div>
