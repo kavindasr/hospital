@@ -5,6 +5,7 @@ const { nicSchema } = require('../validation/department');
 const { etuformService, finalReport, completeEtuForm, admittedPatients } = require('../service/etu');
 const accessControl = require('../middleware/access');
 const ROLES = require('../enums/role');
+const { query } = require('express');
 
 // home page
 router.get('/home', (req, res, next) => {
