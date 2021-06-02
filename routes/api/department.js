@@ -11,6 +11,30 @@ router.get('/bldbank_home', (req, res, next) => {
     res.render('departments/bldbank_home', user);
 });
 
+// ECG home page
+router.get('/ecg_home', (req, res, next) => {
+    const user = req.user;
+    res.render('departments/ecg_home', user);
+});
+
+// Micro Biology home page
+router.get('/biology_dept_home', (req, res, next) => {
+    const user = req.user;
+    res.render('departments/biology_home', user);
+});
+
+// Radiology home page
+router.get('/radiology_dept_home', (req, res, next) => {
+    const user = req.user;
+    res.render('departments/radiology_home', user);
+});
+
+// Chemical and Pathaologgy home page
+router.get('/chem_dept_home', (req, res, next) => {
+    const user = req.user;
+    res.render('departments/chemical_home', user);
+});
+
 // requests page
 router.get('/request', (req, res, next) => {
     const user = req.user;
