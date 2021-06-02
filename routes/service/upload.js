@@ -3,6 +3,7 @@ const { Op } = require('sequelize');
 const ApiError = require('../helpers/ApiError');
 
 const requestService = async (body, file, request_id, dWoker) => {
+    console.log(request_id);
     const database = await getDatabase();
     const request = await database.request.findOne({
         where: {
@@ -13,7 +14,7 @@ const requestService = async (body, file, request_id, dWoker) => {
 
     request.test_status = body.test_status;
     request.dWokerId = dWoker.id;
-    request.attach = file.path;
+    request.attach =  (file)?file.path: null;
     request.feedback = body.feedback;
 
     await request.save();
