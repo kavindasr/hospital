@@ -51,6 +51,18 @@
         </div>
       </nav>
 
+      {{#if err.message}}
+      <div class="d-flex justify-content-center"><p class="text-danger fw-bold">{{err.message}}</p></div>
+    {{/if}}
+
+    {{#if error.message}}
+        <div class="d-flex justify-content-center"><p class="text-danger fw-bold">{{error.message}}</p></div>
+    {{/if}}
+
+    {{#if success.message}}
+        <div class="d-flex justify-content-center"><p class="text-danger fw-bold">{{success.message}}</p></div>
+    {{/if}}
+
       <!-- form content -->
 
       <div class="d-flex justify-content-center">
