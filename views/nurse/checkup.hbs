@@ -98,20 +98,20 @@
 
                         <div class="col-md-4">
                             <label for="validationDefault01" class="form-label">Height</label>
-                            <input name="height" type="text" class="form-control" id="validationDefault01" required>
+                            <input name="height" type="number" class="form-control" id="heightid" required>
                         </div>
 
                         <div class="col-md-4">
                             <label for="validationDefault02" class="form-label">Weight</label>
-                            <input name="weight" type="text" class="form-control" id="validationDefault02"  required>
+                            <input name="weight" type="number" class="form-control" id="weightid"  required>
                         </div>
                         
                         <div class="col-md-4">
                             <label for="validationDefault02" class="form-label">BMI</label>
                             <div class="input-group mb-3">
-                                <input name="bmi" type="text" class="form-control" id="validationDefault02"  required>
+                                <input name="bmi" type="text" class="form-control" id="bmiid"  required>
                                 <div class="input-group-append">
-                                  <button class="btn btn-success" type="button">Calculate</button>
+                                  <button class="btn btn-success" type="button" onclick="myFunction()">Calculate</button>
                                 </div>
                               </div>
                         </div>
@@ -130,7 +130,17 @@
         </div>
     </div>
 
-
+    <script>
+      function myFunction() {
+        var txtFirstNumberValue = document.getElementById('heightid').value;
+        var txtSecondNumberValue = document.getElementById('weightid').value;
+        var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+        if(!isNaN(result)){
+          alert(result)
+            document.getElementById('bmiid').value = result;
+        }
+      }
+    </script>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
