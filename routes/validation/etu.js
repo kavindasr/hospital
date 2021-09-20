@@ -23,7 +23,7 @@ const test_deptSchema = Joi.array().items(Joi.object().keys({
 
 const etuCompletionSchema = Joi.object().keys({
     id: Joi.number().integer().required(),
-    asgn_ward: Joi.number(),
+    asgn_ward: Joi.string(),
     status: Joi.string().valid('Admitted', 'Discharged').required(),
 });
 

@@ -60,6 +60,7 @@ router.post('/checkup', async (req, res, next) => {
     try {
         console.log(req.user.role.id)
         const { value, error } = checkupSchema.validate(req.body);
+        value.visit_date = (new Date()).toISOString().substr(0,10);
         if (error) {
             next(ApiError.unprocessableEntity(error));
             return;
