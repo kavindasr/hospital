@@ -20,10 +20,13 @@ router.get('/etuform', (req, res, next) => {
 
 router.post('/etuform', async (req, res, next) => {
     try {
-        if (typeof(req.body.observation)!=Array){
+        let arg1 = (typeof(req.body.observation));
+        let arg2 = (typeof(req.body.test_depts));
+        if (arg1!="object"){
+            console.log("hiiii")
             req.body.observation=[req.body.observation]
         }
-        if (typeof(req.body.test_depts)!=Array){
+        if (arg2!="object"){
             req.body.test_depts=[req.body.test_depts]
         }
         const { value, error } = etuformSchema.validate(req.body);
@@ -32,7 +35,8 @@ router.post('/etuform', async (req, res, next) => {
             return;
         }
         await etuformService(req.body, req.user.role.id);
-        res.status(201).send('Form submitted');
+        var success = {message:"Form submitted"}
+        res.status(200).render('etu/etuform', {success});  
     } catch (err) {
         if (err instanceof ApiError){
             res.status(422).render('etu/etuform', {err});
