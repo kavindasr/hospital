@@ -88,7 +88,89 @@ const finalReport = async (patientNic, visit_date) => {
     })
     etuObj.checkup = checkup.dataValues;
     etuObj.requests = reqObj;
-    return etuObj;
+    let data=etuObj
+    let resprate = 0
+    let pilserate = 0
+    let sat = 0
+    let sgs = 0
+    let bpval = 0
+
+    //resprate
+    if (data.checkup.resp_rate<8){
+        resprate=10
+    } else if (data.checkup.resp_rate<11){
+        resprate=7
+    } else if (data.checkup.resp_rate<20) {
+        resprate=1
+    } else if (data.checkup.resp_rate<39) {
+        resprate=5
+    } else if (data.checkup.resp_rate<60) {
+        resprate=8
+    } else {
+        resprate=9
+    }
+
+    //sat
+    if (data.so2<60){
+        sat=10
+    } else if (data.so2<80){
+        sat=9
+    } else if (data.so2<90) {
+        sat=8
+    } else if (data.so2<95) {
+        sat=5
+    } else if (data.so2<100) {
+        sat=1
+    } else {
+        sat=9
+    }
+
+    //sbp
+    if (data.checkup.resp_rate<70){
+        bpval=10
+    } else if (data.checkup.bp<90){
+        bpval=8
+    } else if (data.checkup.bp<150) {
+        bpval=1
+    } else {
+        bpval=6
+    }
+
+    //pulse
+    if (data.checkup.pulse_rate<40){
+        pilserate=10
+    } else if (data.checkup.pulse_rate<50){
+        pilserate=8
+    } else if (data.checkup.pulse_rate<60) {
+        pilserate=6
+    } else if (data.checkup.pulse_rate<100) {
+        pilserate=1
+    } else if (data.checkup.pulse_rate<150) {
+        pilserate=7
+    }else if (data.checkup.pulse_rate<180) {
+        pilserate=8
+    } else {
+        pilserate=10
+    }
+
+    // gcs
+    if ((data.eye + data.verbal +data.motor)<8){
+        sgs=10
+    } else if ((data.eye + data.verbal +data.motor)<12){
+        sgs=9
+    } else if ((data.eye + data.verbal +data.motor)<14) {
+        sgs=5
+    } else if ((data.eye + data.verbal +data.motor)==15) {
+        sgs=1
+    }
+
+    resprate , bpval , pilserate, sat, sgs
+    let seviority = (resprate+bpval+pilserate+sat+sgs)*2
+    console.log(data)
+    console.log(data.severity)
+    console.log(seviority)
+    data.severity=seviority;
+    return data;
 }
 
 const completeEtuForm = async ({id, status, asgn_ward}) => {

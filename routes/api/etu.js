@@ -6,6 +6,7 @@ const { etuformService, finalReport, completeEtuForm, admittedPatients } = requi
 const accessControl = require('../middleware/access');
 const ROLES = require('../enums/role');
 const { query } = require('express');
+const e = require('express');
 
 // home page
 router.get('/home', (req, res, next) => {
@@ -58,6 +59,11 @@ router.get('/finalreport', async (req, res, next) => {
             return;
         } 
         const data = await finalReport(value, visit_date);
+
+        console.log(data.severity)
+        // data.severity=seviority
+        // console.log(data.severity)
+
         res.status(200).render('etu/etufinalreport', {data});
         //res.status(200).send(data);
     }
