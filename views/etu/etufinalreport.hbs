@@ -388,7 +388,34 @@
             </div>
 
             <div id="Reports" class="tabcontent">
-                
+                <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">Test Type</th>
+                      <th scope="col">Special Note</th>
+                      <th scope="col">Test Status</th>
+                      <th scope="col">feed Back</th>
+                      <th scope="col">Attachment</th>
+                  </tr>
+              </thead>
+                <tbody>
+
+                    {{#if data.requests}}
+                        {{#each data.requests}}
+                                          
+                        <tr>
+                            <td>{{this.test_type}}</td>
+                            <td>{{this.special_note}}</td>
+                            <td>{{this.test_status}}</td>
+                            <td>{{this.feedback}}</td>
+                            <td><a href="{{this.attach}}" target="blank">View Report</a></td>
+                        </tr>
+
+                        {{/each}}
+                      {{/if}}
+                      
+                      </tbody>
+                </table>
             </div>
             <div id="PatientsDetails" class="tabcontent">
                 <div class="col-12">

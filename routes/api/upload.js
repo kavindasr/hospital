@@ -6,6 +6,7 @@ const { requestService } = require('../service/upload');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
+        console.log(file)
       cb(null, __dirname+'../../../uploads');
     },
     filename: function(req, file, cb) {
