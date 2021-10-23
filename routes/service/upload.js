@@ -16,7 +16,7 @@ const requestService = async (body, file, request_id, dWoker) => {
     console.log(typeof(file.path))
     const fn = file.path;
 
-    const filePath = fn.substr(fn.search( /\/uploads/g))
+    const filePath = "/uploads/"+ fn.substr(fn.search( /uploads/g)+7)
     console.log(typeof(filePath))
 
     request.test_status = body.test_status;
